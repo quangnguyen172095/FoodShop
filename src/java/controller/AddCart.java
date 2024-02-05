@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.google.gson.JsonObject;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import model.Customer;
 import model.Order;
+import model.OrderDetail;
 import model.Products;
 
 /**
@@ -34,7 +36,7 @@ public class AddCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -79,20 +81,44 @@ public class AddCart extends HttpServlet {
             Products p = new DAOProducts().findById(productId);
             order.addItems(p);
             session.setAttribute("order", order);
+            request.getRequestDispatcher("Cart.jsp").forward(request, response);
         } else if (action != null && action.equals("delete")) {
             //delete
             Order order = (Order) session.getAttribute("order");
             order.removeItem(productId);
             session.setAttribute("order", order);
-        }else if (action != null && action.equals("update")) {
+            request.getRequestDispatcher("Cart.jsp").forward(request, response);
+        } else if (action != null && action.equals("update")) {
             //update quantity
             Order order = (Order) session.getAttribute("order");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             order.updateItem(productId, quantity);
             session.setAttribute("order", order);
+            String totalPrice = "<strong>" + order.getTotalPrice() + " VNÐ</strong>";
+            String cartList = "";
+            for (OrderDetail item : order.getOrderDetails()) {
+                cartList += "<tr>\n"
+                        + "                                        <td class=\"p-4\">\n"
+                        + "                                            <div class=\"media align-items-center\">\n"
+                        + "                                                <img src=\"./assets/images/menu/"+item.getImage()+"\" class=\"d-block ui-w-40 ui-bordered mr-4\" alt=\"\">\n"
+                        + "                                                <div class=\"media-body\">\n"
+                        + "                                                    <a href=\"/productdetail?id="+item.getProductID()+"\" class=\"d-block text-dark\">"+item.getProductName()+"</a>\n"
+                        + "                                                </div>\n"
+                        + "                                            </div>\n"
+                        + "                                        </td>\n"
+                        + "                                        <td class=\"text-right font-weight-semibold align-middle p-4\">"+item.getPrice()+" VNÐ</td>\n"
+                        + "                                        <td class=\"align-middle p-4\"><input type=\"number\" name=\"quantity\" class=\"form-control text-center\" value=\""+item.getQuantity()+"\" min=\"0\" onchange=\"updateQuantity(this, "+item.getProductID()+")\"></td>\n"
+                        + "                                        <td class=\"text-right font-weight-semibold align-middle p-4\">"+(item.getPrice() * item.getQuantity())+" VNÐ</td>\n"
+                        + "                                        <td class=\"text-center align-middle px-0\"><a href=\"cart?productID="+item.getProductID()+"&action=delete\" class=\"shop-tooltip close float-none text-danger\" title=\"\" data-original-title=\"Remove\">×</a></td>\n"
+                        + "                                    </tr>";
+            }
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("total", totalPrice);
+            jsonResponse.addProperty("list", cartList);
+            response.getWriter().write(jsonResponse.toString());
         }
 
-        request.getRequestDispatcher("Cart.jsp").forward(request, response);
+//        request.getRequestDispatcher("Cart.jsp").forward(request, response);
     }
 
     /**

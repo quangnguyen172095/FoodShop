@@ -87,7 +87,7 @@
                                     <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="cartList">
                                 <c:forEach items="${sessionScope.order.getOrderDetails()}" var="i">
                                     <tr>
                                         <td class="p-4">
@@ -123,7 +123,7 @@
                             </div>-->
                             <div class="text-right mt-4">
                                 <label class="text-muted font-weight-normal m-0">Total price</label>
-                                <div class="text-large"><strong>${sessionScope.order.getTotalPrice()} VNÐ</strong></div>
+                                <div class="text-large" id="totalPrice"><strong>${sessionScope.order.getTotalPrice()} VNÐ</strong></div>
                             </div>
                         </div>
                     </div>
@@ -218,9 +218,15 @@
                                                         productID: productID
                                                     },
                                                     success: function (data) {
-                                                        setTimeout(() => {
-                                                            window.location.href = './Cart.jsp';
-                                                        }, 100);
+//                                                        setTimeout(() => {
+//                                                            window.location.href = './Cart.jsp';
+//                                                        }, 100);
+                                                        var totalPrice = document.getElementById("totalPrice");
+                                                        var cartList = document.getElementById("cartList");
+                                                        var parsedResponse = JSON.parse(data);
+
+                                                        totalPrice.innerHTML = parsedResponse.total;
+                                                        cartList.innerHTML = parsedResponse.list;
                                                     },
                                                     error: function (xhr) {
                                                     }

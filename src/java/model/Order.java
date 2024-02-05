@@ -203,4 +203,15 @@ public class Order {
             }
         }
     }
+
+    public float getItemPrice(int productId) {
+        float price = 0;
+        for (OrderDetail od : orderDetails) {
+            if (od.getProductID() == productId) {
+                price = od.getQuantity() * od.getPrice();
+                break;
+            }
+        }
+        return price; // Trả về 0 nếu không tìm thấy sản phẩm
+    }
 }

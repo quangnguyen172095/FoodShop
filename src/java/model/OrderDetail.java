@@ -18,6 +18,7 @@ public class OrderDetail {
     private String image;
     private Order orders;
     private Products products;
+    private float getTotalPrice;
     
     public OrderDetail(Order orders, Products products, int quantity) {
         this.orders = orders;
@@ -118,6 +119,10 @@ public class OrderDetail {
 
     public void setProducts(Products products) {
         this.products = products;
+    }
+    
+    public float getTotalPrice() {
+        return getQuantity()*getPrice();
     }
 
     
