@@ -49,14 +49,14 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.CUS != null}">
                                                     <a href="DetailAccountController">
-                                                        <i class="fa"></i>Hello ${sessionScope.CUS.getFullName()}
+                                                        <i class="fa"></i>Xin chào ${sessionScope.CUS.getFullName()}
                                                     </a>
                                                 </c:when>
                                             </c:choose>
-                                            <a class="bk-btn" href="LogoutController">Logout</a>
+                                            <a class="bk-btn" href="LogoutController">Đăng xuất</a>
                                         </c:if>
                                         <c:if test="${sessionScope.ACC == null && sessionScope.CUS == null}">
-                                            <a href="LoginController" class="bk-btn">Login</a>
+                                            <a href="LoginController" class="bk-btn">Đăng nhập</a>
                                         </c:if>
                                     </li>
 
@@ -72,7 +72,7 @@
             <!-- Shopping cart table -->
             <div class="card">
                 <div class="card-header">
-                    <h2>Shopping Cart</h2>
+                    <h2>Giỏ hàng</h2>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -80,11 +80,11 @@
                             <thead>
                                 <tr>
                                     <!-- Set columns width -->
-                                    <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
-                                    <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                                    <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                                    <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                                    <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                                    <th class="text-center py-3 px-4" style="min-width: 400px; vertical-align: middle; white-space: nowrap;">Sản phẩm</th>
+                                    <th class="text-right py-3 px-4" style="width: 100px; vertical-align: middle; white-space: nowrap;">Giá tiền</th>
+                                    <th class="text-center py-3 px-4" style="width: 120px; vertical-align: middle;">Số lượng</th>
+                                    <th class="text-right py-3 px-4" style="width: 100px; vertical-align: middle; white-space: nowrap;">Tổng</th>
+                                    <th class="text-center align-middle py-3 px-0" style="width: 40px; vertical-align: middle;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
                                 </tr>
                             </thead>
                             <tbody id="cartList">
@@ -99,9 +99,9 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-right font-weight-semibold align-middle p-4">${i.getPrice()} VNÐ</td>
+                                        <td class="text-right font-weight-semibold align-middle p-4">${Math.round((i.getPrice() - (i.getPrice() * i.getDiscount())) * 100) / 100} VNÐ</td>
                                         <td class="align-middle p-4"><input type="number" name="quantity" class="form-control text-center" value="${i.getQuantity()}" min="0" onchange="updateQuantity(this, ${i.getProductID()})"></td>
-                                        <td class="text-right font-weight-semibold align-middle p-4">${String.format("%.2f", i.getQuantity() * i.getPrice())} VNÐ</td>
+                                        <td class="text-right font-weight-semibold align-middle p-4">${Math.round((i.getQuantity() * (i.getPrice() - (i.getPrice() * i.getDiscount())) * 100)) / 100} VNÐ</td>
                                         <td class="text-center align-middle px-0"><a href="cart?productID=${i.getProductID()}&action=delete" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
                                     </tr>
                                 </c:forEach>
@@ -113,25 +113,30 @@
 
                     <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
                         <div class="mt-4">
-                            <label class="text-muted font-weight-normal">Promocode</label>
-                            <input type="text" placeholder="ABC" class="form-control">
+                            <label class="text-muted font-weight-normal"></label>
                         </div>
                         <div class="d-flex">
-<!--                            <div class="text-right mt-4 mr-5">
-                                <label class="text-muted font-weight-normal m-0">Discount</label>
-                                <div class="text-large"><strong>$0</strong></div>
-                            </div>-->
+                            <!--                            <div class="text-right mt-4 mr-5">
+                                                            <label class="text-muted font-weight-normal m-0">Discount</label>
+                                                            <div class="text-large"><strong>$0</strong></div>
+                                                        </div>-->
                             <div class="text-right mt-4">
-                                <label class="text-muted font-weight-normal m-0">Total price</label>
-                                <div class="text-large" id="totalPrice"><strong>${sessionScope.order.getTotalPrice()} VNÐ</strong></div>
+                                <label class="text-muted font-weight-normal m-0">Tổng giá tiền</label>
+                                <div class="text-large" id="totalPrice"><strong>${Math.round(sessionScope.order.getTotalPrice()*100)/100} VNÐ</strong></div>
                             </div>
                         </div>
                     </div>
-
                     <div class="float-right">
-                        <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-                        <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+                        <form action="checkout" method="GET">
+                            <button type="submit" class="btn btn-lg btn-primary mt-2">Thanh toán</button>
+                        </form>
+                    </div>    
+                    <div class="float-right">
+                        <form action="menu" method="GET">
+                            <button type="submit" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Tiếp tục mua hàng</button>
+                        </form>
                     </div>
+
 
                 </div>
             </div>

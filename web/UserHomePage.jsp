@@ -53,14 +53,14 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.CUS != null}">
                                                     <a href="DetailAccountController">
-                                                        <i class="fa"></i>Hello ${sessionScope.CUS.getFullName()}
+                                                        <i class="fa"></i>Xin chào ${sessionScope.CUS.getFullName()}
                                                     </a>
                                                 </c:when>
                                             </c:choose>
-                                            <a class="bk-btn" href="LogoutController">Logout</a>
+                                            <a class="bk-btn" href="LogoutController">Đăng xuất</a>
                                         </c:if>
                                         <c:if test="${sessionScope.ACC == null && sessionScope.CUS == null}">
-                                            <a href="LoginController" class="bk-btn">Login</a>
+                                            <a href="LoginController" class="bk-btn">Đăng nhập</a>
                                         </c:if>
                                     </li>
                                 </ul>
@@ -100,7 +100,7 @@
                                                         incidunt iste, architecto voluptate amet veniam 
                                                         odio, reiciendis modi</h5>
                                                     <ol>
-                                                        <li><a href="menu">Order Now<span class="flaticon-right-arrow"></span></a></li>
+                                                        <li><a href="menu">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
                                                     </ol>
                                                 </div>
                                             </div>
@@ -126,7 +126,7 @@
                                                         incidunt iste, architecto voluptate amet veniam 
                                                         odio, reiciendis modi</h5>
                                                     <ol>
-                                                        <li><a href="#">Order Now<span class="flaticon-right-arrow"></span></a></li>
+                                                        <li><a href="#">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
                                                     </ol>
                                                 </div>
                                             </div>
@@ -152,7 +152,7 @@
                                                         incidunt iste, architecto voluptate amet veniam 
                                                         odio, reiciendis modi</h5>
                                                     <ol>
-                                                        <li><a href="#">Order Now<span class="flaticon-right-arrow"></span></a></li>
+                                                        <li><a href="#">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
                                                     </ol>
                                                 </div>
                                             </div>
@@ -359,7 +359,7 @@
                                                         <form action="cart" method="GET">
                                                             <input type="hidden" name="productID" value="${l.getProductID()}">
                                                             <button type="submit">
-                                                                <span>Add to cart</span>
+                                                                <span>Mua ngay</span>
                                                             </button>
                                                         </form>
                                                     </div>

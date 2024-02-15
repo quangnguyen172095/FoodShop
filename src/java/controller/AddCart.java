@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import model.Customer;
 import model.Order;
 import model.OrderDetail;
@@ -94,23 +95,31 @@ public class AddCart extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             order.updateItem(productId, quantity);
             session.setAttribute("order", order);
-            String totalPrice = "<strong>" + order.getTotalPrice() + " VNÐ</strong>";
+
+            DecimalFormat decimalFormat = new DecimalFormat("#.##"); // Định dạng số với 2 chữ số thập phân
+            String totalPrice = "<strong>" + decimalFormat.format(order.getTotalPrice()) + " VNÐ</strong>";
             String cartList = "";
             for (OrderDetail item : order.getOrderDetails()) {
+                float unitPrice = item.getPrice() - item.getPrice() * item.getDiscount();
+                float totalPricePerItem = unitPrice * item.getQuantity();
+
+                unitPrice = Float.parseFloat(decimalFormat.format(unitPrice)); // Làm tròn giá unitPrice
+                totalPricePerItem = Float.parseFloat(decimalFormat.format(totalPricePerItem)); // Làm tròn giá totalPricePerItem
+
                 cartList += "<tr>\n"
-                        + "                                        <td class=\"p-4\">\n"
-                        + "                                            <div class=\"media align-items-center\">\n"
-                        + "                                                <img src=\"./assets/images/menu/"+item.getImage()+"\" class=\"d-block ui-w-40 ui-bordered mr-4\" alt=\"\">\n"
-                        + "                                                <div class=\"media-body\">\n"
-                        + "                                                    <a href=\"/productdetail?id="+item.getProductID()+"\" class=\"d-block text-dark\">"+item.getProductName()+"</a>\n"
-                        + "                                                </div>\n"
-                        + "                                            </div>\n"
-                        + "                                        </td>\n"
-                        + "                                        <td class=\"text-right font-weight-semibold align-middle p-4\">"+item.getPrice()+" VNÐ</td>\n"
-                        + "                                        <td class=\"align-middle p-4\"><input type=\"number\" name=\"quantity\" class=\"form-control text-center\" value=\""+item.getQuantity()+"\" min=\"0\" onchange=\"updateQuantity(this, "+item.getProductID()+")\"></td>\n"
-                        + "                                        <td class=\"text-right font-weight-semibold align-middle p-4\">"+(item.getPrice() * item.getQuantity())+" VNÐ</td>\n"
-                        + "                                        <td class=\"text-center align-middle px-0\"><a href=\"cart?productID="+item.getProductID()+"&action=delete\" class=\"shop-tooltip close float-none text-danger\" title=\"\" data-original-title=\"Remove\">×</a></td>\n"
-                        + "                                    </tr>";
+                        + "    <td class=\"p-4\">\n"
+                        + "        <div class=\"media align-items-center\">\n"
+                        + "            <img src=\"./assets/images/menu/" + item.getImage() + "\" class=\"d-block ui-w-40 ui-bordered mr-4\" alt=\"\">\n"
+                        + "            <div class=\"media-body\">\n"
+                        + "                <a href=\"/productdetail?id=" + item.getProductID() + "\" class=\"d-block text-dark\">" + item.getProductName() + "</a>\n"
+                        + "            </div>\n"
+                        + "        </div>\n"
+                        + "    </td>\n"
+                        + "    <td class=\"text-right font-weight-semibold align-middle p-4\">" + unitPrice + " VNÐ</td>\n"
+                        + "    <td class=\"align-middle p-4\"><input type=\"number\" name=\"quantity\" class=\"form-control text-center\" value=\"" + item.getQuantity() + "\" min=\"0\" onchange=\"updateQuantity(this, " + item.getProductID() + ")\"></td>\n"
+                        + "    <td class=\"text-right font-weight-semibold align-middle p-4\">" + totalPricePerItem + " VNÐ</td>\n"
+                        + "    <td class=\"text-center align-middle px-0\"><a href=\"cart?productID=" + item.getProductID() + "&action=delete\" class=\"shop-tooltip close float-none text-danger\" title=\"\" data-original-title=\"Remove\">×</a></td>\n"
+                        + "</tr>";
             }
             JsonObject jsonResponse = new JsonObject();
             jsonResponse.addProperty("total", totalPrice);

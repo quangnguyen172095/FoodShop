@@ -166,7 +166,7 @@ public class Order {
         for (OrderDetail od : orderDetails) {
             Products product = getProductById(od.getProductID());
             if (product != null) {
-                total += od.getQuantity() * product.getPrice();
+                total += od.getQuantity() * (product.getPrice()-product.getPrice()*product.getDiscount());
             }
         }
         return total;
@@ -179,7 +179,7 @@ public class Order {
                 return;
             }
         }
-        this.orderDetails.add(new OrderDetail(product.getProductID(), product.getProductName(), product.getPrice(), product.getImage()));
+        this.orderDetails.add(new OrderDetail(product.getProductID(), product.getProductName(), product.getPrice(), product.getImage(), product.getDiscount()));
     }
 
     public void removeItem(int productId) {
@@ -214,4 +214,5 @@ public class Order {
         }
         return price; // Trả về 0 nếu không tìm thấy sản phẩm
     }
+    
 }

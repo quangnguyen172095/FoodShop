@@ -56,7 +56,7 @@
                                             <a class="bk-btn" href="LogoutController">Logout</a>
                                         </c:if>
                                         <c:if test="${sessionScope.ACC == null && sessionScope.CUS == null}">
-                                            <a href="LoginController" class="bk-btn">Login</a>
+                                            <a href="LoginController" class="bk-btn">Đăng nhập</a>
                                         </c:if>
                                     </li>
                                 </ul>
@@ -77,7 +77,7 @@
                             <div class="fs-5 mb-5">
                                 <c:choose>
                                     <c:when test="${product.getDiscount() == 0}">
-                                        <span>$${product.getPrice()}</span>
+                                        <span>${product.getPrice()} VNÐ</span>
                                     </c:when>
                                     <c:otherwise>
                                         <span class="text-decoration-line-through">${product.getPrice()} VNÐ</span>
@@ -90,7 +90,7 @@
                                 <form action="cart" method="GET">
                                     <input type="hidden" name="productID" value="${product.getProductID()}">
                                     <button type="submit">
-                                        <span>Add to cart</span>
+                                        <span>Mua ngay</span>
                                     </button>
                                 </form>
                                 

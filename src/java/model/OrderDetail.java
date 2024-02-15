@@ -19,6 +19,16 @@ public class OrderDetail {
     private Order orders;
     private Products products;
     private float getTotalPrice;
+    private float discount;
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+    
     
     public OrderDetail(Order orders, Products products, int quantity) {
         this.orders = orders;
@@ -51,11 +61,12 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public OrderDetail(int ProductID, String ProductName, float price, String image) {
+    public OrderDetail(int ProductID, String ProductName, float price, String image, float discount) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.price = price;
         this.image = image;
+        this.discount = discount;
     }
 
     public OrderDetail(int OrderID, int ProductID, int Quantity, String ProductName, float price) {
