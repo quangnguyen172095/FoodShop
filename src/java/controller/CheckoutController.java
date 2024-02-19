@@ -95,7 +95,7 @@ public class CheckoutController extends HttpServlet {
                     String freight = request.getParameter("freight");
                     String paymentMethod = request.getParameter("paymentMethod");
                     try {
-                        handleCheckout(session, a, order, address, freight, paymentMethod);
+                        handleCheckout(session, a, order, address, order.getTotalPrice(), paymentMethod);
                         request.setAttribute("message", "Order successfull!");
                     } catch (Exception e) {
                         request.setAttribute("errorMessage", "Order failed!");
@@ -137,7 +137,7 @@ public class CheckoutController extends HttpServlet {
             if (paymentMethod.equals("1")) {
                 //cod
                 try {
-                    handleCheckout(session, c, order, address, freight, paymentMethod);
+                    handleCheckout(session, c, order, address, order.getTotalPrice(), paymentMethod);
                     request.setAttribute("message", "Order successfull!");
                     request.getRequestDispatcher("Checkout.jsp").forward(request, response);
                 } catch (Exception e) {
@@ -150,7 +150,7 @@ public class CheckoutController extends HttpServlet {
                 String vnp_Version = "2.1.0";
                 String vnp_Command = "pay";
                 String orderType = "other";
-                long amount = (long) (order.getTotalPrice() * 100);
+                long amount = (long) (order.getTotalPrice() * 100 *10000);
                 String bankCode = "NCB";
 
                 String vnp_TxnRef = Config.getRandomNumber(8);
@@ -223,7 +223,7 @@ public class CheckoutController extends HttpServlet {
         }
     }
 
-    public void handleCheckout(HttpSession session, Customer c, Order order, String address, String freight, String paymentMethod) {
+    public void handleCheckout(HttpSession session, Customer c, Order order, String address, float freight, String paymentMethod) {
         DAOOrder daoOrder = new DAOOrder();
         DAOOrderDetail daoOrderDetail = new DAOOrderDetail();
         DAOProducts daoProduct = new DAOProducts();
@@ -240,7 +240,7 @@ public class CheckoutController extends HttpServlet {
         }
 
         //insert order
-        daoOrder.saveOrder(new Order(c.getCustomerId(), "Processing", dateInsert, payment, address, Float.parseFloat(freight), transaction));
+        daoOrder.saveOrder(new Order(c.getCustomerId(), "Processing", dateInsert, payment, address, freight, transaction));
 
         //insert order detail
         int orderID = daoOrder.getOrderID();

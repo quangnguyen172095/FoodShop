@@ -93,14 +93,12 @@
                                         <div class="checkout_details_area mt-50 clearfix">
                                             <div class="row">
                                                 <div class="col-12 mb-3">
-                                                    <input type="text" class="form-control" id="address" placeholder="Receiving Address" value="" required name="address">
+                                                    <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ" value="" required name="address">
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <input type="number" class="form-control" id="freight" placeholder="Freight" value="" required name="freight">
-                                                </div>
+                                                
 
                                                 <div class="col-12 mb-3">
-                                                    <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="5" placeholder="Leave a comment about your order"></textarea>
+                                                    <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="5" placeholder="Ghi chú"></textarea>
                                                 </div>
                                             </div>
                                         </div>
