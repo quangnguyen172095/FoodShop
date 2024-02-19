@@ -24,8 +24,7 @@ public class DAOOrderDetail extends DBContext {
     DAOOrder ordersDAO = new DAOOrder();
     DAOProducts productsDAO = new DAOProducts();
     public boolean saveOrderDetail(OrderDetail orderDetail) {
-        String query = "INSERT INTO order_details (OrderID, ProductID, Quantity) VALUES (?, ?, ?)";
-
+        String query = "INSERT INTO OrderDetails (OrderID, ProductID, Quantity) VALUES (?, ?, ?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setInt(1, orderDetail.getOrderID());
             pre.setInt(2, orderDetail.getProductID());

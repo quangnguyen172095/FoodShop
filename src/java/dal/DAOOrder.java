@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,33 +17,43 @@ import model.Order;
  * @author PC
  */
 public class DAOOrder extends DBContext {
+
     PreparedStatement stm;
     ResultSet rs;
     DAOCustomer customersDAO = new DAOCustomer();
     AdminDAO adminDAO = new AdminDAO();
 
-
     public boolean saveOrder(Order order) {
-        String query = "INSERT INTO orders (CustomerID, OrderStatus, OrderDate, PaymentMethod, ShippingAddress, Freight, CreatedBy, CreatedOn, TransactionStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO orders (CustomerID, OrderStatus, OrderDate, PaymentMethod, ShippingAddress, Freight, TransactionStatus) VALUES (?, ?, ?, ?, ?, ?,?)";
 
-        try ( PreparedStatement pre = con.prepareStatement(query)) {
+        try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setInt(1, order.getCustomerID());
             pre.setString(2, order.getOrderStatus());
             pre.setDate(3, new java.sql.Date(order.getOrderDate().getTime()));
             pre.setString(4, order.getPaymentMethod());
             pre.setString(5, order.getShippingAddress());
             pre.setFloat(6, order.getFreight());
-            pre.setInt(7, order.getCreatedBy());
-            pre.setDate(8, new java.sql.Date(order.getCreatedOn().getTime()));
-            pre.setString(9, order.getTransactionStatus());
-
+            pre.setString(7, order.getTransactionStatus());
             pre.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return false;
+    }
+
+    public int getOrderID() {
+        String query = "SELECT TOP(1) OrderID from orders order by OrderID DESC";
+        try {
+            DBContext db = new DBContext();
+            PreparedStatement pre = con.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public Order SearchByID(int ordersID) {

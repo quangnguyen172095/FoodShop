@@ -49,6 +49,19 @@ public class DAOProducts extends DBContext {
         return pro;
     }
 
+    public void updateAmounProduct(int amount, int productID) {
+        String query = "UPDATE Products SET Quantity = ? WHERE ProductID = ?";
+        DBContext db = new DBContext();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, amount);
+            ps.setInt(2, productID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Products> searchProductByCategory(int cateId) {
         ArrayList<Products> searchList = new ArrayList<>();
 
@@ -263,6 +276,7 @@ public class DAOProducts extends DBContext {
                 + "                           ,[ModifiedOn]\n"
                 + "                       FROM [dbo].[Products]\n"
                 + "                       WHERE ProductID = ?";
+        DBContext db = new DBContext();
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, productId);

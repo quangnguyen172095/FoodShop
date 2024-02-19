@@ -203,7 +203,7 @@
                                     <label class="control-label">Category</label>
                                     <select class="form-control" name="category">
                                         <c:forEach var="category" items="${requestScope.categories}">
-                                            <option value="${category.categoryId}">${category.categoryName}</option>
+                                            <option value="${category.categoryID}">${category.categoryName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

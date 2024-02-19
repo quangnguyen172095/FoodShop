@@ -28,6 +28,16 @@ public class Order {
     private String TransactionStatus;
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
+    public Order(int CustomerID, String OrderStatus, Date OrderDate, String PaymentMethod, String ShippingAddress, float Freight, String TransactionStatus) {
+        this.CustomerID = CustomerID;
+        this.OrderStatus = OrderStatus;
+        this.OrderDate = OrderDate;
+        this.PaymentMethod = PaymentMethod;
+        this.ShippingAddress = ShippingAddress;
+        this.Freight = Freight;
+        this.TransactionStatus = TransactionStatus;
+    }
+
     public Order(int OrderID, int CustomerID, String OrderStatus, Date OrderDate, String PaymentMethod, String ShippingAddress, float Freight, String TransactionStatus, List<OrderDetail> orderDetails) {
         this.OrderID = OrderID;
         this.CustomerID = CustomerID;
@@ -166,7 +176,7 @@ public class Order {
         for (OrderDetail od : orderDetails) {
             Products product = getProductById(od.getProductID());
             if (product != null) {
-                total += od.getQuantity() * (product.getPrice()-product.getPrice()*product.getDiscount());
+                total += od.getQuantity() * (product.getPrice() - product.getPrice() * product.getDiscount());
             }
         }
         return total;
@@ -214,5 +224,5 @@ public class Order {
         }
         return price; // Trả về 0 nếu không tìm thấy sản phẩm
     }
-    
+
 }
