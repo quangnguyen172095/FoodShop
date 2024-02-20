@@ -121,7 +121,6 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String address = request.getParameter("address");
-        String freight = request.getParameter("freight");
         String paymentMethod = request.getParameter("paymentMethod");
         HttpSession session = request.getSession();
         Customer c = (Customer) session.getAttribute("CUS");
@@ -176,7 +175,7 @@ public class CheckoutController extends HttpServlet {
                 } else {
                     vnp_Params.put("vnp_Locale", "vn");
                 }
-                String returnURL = Config.vnp_ReturnUrl + "?address=" + address + "&freight=" + freight + "&paymentMethod=" + paymentMethod + "&";
+                String returnURL = Config.vnp_ReturnUrl + "?address=" + address + "&paymentMethod=" + paymentMethod + "&";
                 vnp_Params.put("vnp_ReturnUrl", returnURL);
                 vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
