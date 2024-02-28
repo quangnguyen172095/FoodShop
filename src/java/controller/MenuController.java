@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DAOHome;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import model.Categories;
+import model.HeaderHome;
 import model.Products;
 
 
@@ -61,9 +64,27 @@ public class MenuController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
-        ArrayList<Products> listProduct = dao.getProducts();
+        String index_raw = request.getParameter("index");
+        if(index_raw==null){
+            index_raw = "1";
+        }
+        int index = Integer.parseInt(index_raw);
+                
+        int count = dao.getTotalProduct();
+        int endpage = count/10;
+        if(count%10!=0){
+            endpage++;
+        }
+        List<Products> listProductByPage = dao.pagingProduct(index);
         ArrayList<Categories> listCategories = dao.getCategories();
-        request.setAttribute("listProduct", listProduct);
+        
+        //header
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
+        
+        request.setAttribute("listbypage", listProductByPage);
+        request.setAttribute("endpage", endpage);
         request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }

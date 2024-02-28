@@ -5,6 +5,7 @@
 package controller;
 
 import com.google.gson.JsonObject;
+import dal.DAOHome;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +15,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import model.Customer;
+import model.HeaderHome;
 import model.Order;
 import model.OrderDetail;
 import model.Products;
@@ -64,6 +67,9 @@ public class AddCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         Customer cus = (Customer) session.getAttribute("CUS");
         if (cus == null) {
             response.sendRedirect("LoginController");

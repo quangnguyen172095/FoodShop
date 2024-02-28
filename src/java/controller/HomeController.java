@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DAOHome;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import model.HeaderHome;
 import model.Products;
 
 
@@ -61,6 +63,9 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
         ArrayList<Products> listProductHome = dao.gettop6Products();
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         request.setAttribute("listProductHome", listProductHome);
         request.getRequestDispatcher("UserHomePage.jsp").forward(request, response);
     }
@@ -77,8 +82,11 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
         ArrayList<Products> listProductHome = dao.gettop6Products();
         request.setAttribute("listProductHome", listProductHome);
+        request.setAttribute("listHeader", listHeader);
         request.getRequestDispatcher("UserHomePage.jsp").forward(request, response);
     }
 

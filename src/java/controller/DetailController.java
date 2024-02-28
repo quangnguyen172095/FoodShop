@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DAOHome;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import model.HeaderHome;
 import model.Products;
 
 
@@ -62,6 +65,11 @@ public class DetailController extends HttpServlet {
         int productid = Integer.parseInt(id_raw);
         DAOProducts dao = new DAOProducts();
         Products product = dao.findById(productid);
+        
+        //header
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         request.setAttribute("product", product);
         request.getRequestDispatcher("DetailProduct.jsp").forward(request, response);
     }

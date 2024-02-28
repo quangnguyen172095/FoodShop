@@ -4,6 +4,7 @@ body {
     margin: 0;
     box-sizing: border-box;
 }
+
 /*css home*/
 .row {
     display: flex;
@@ -126,6 +127,30 @@ body {
     background-color: #ffa500; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
+
+.pagination {
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: white;
+    border: 1px solid #333;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 /*css co san*/
 * {
@@ -504,7 +529,7 @@ header .menu.active::before {
     bottom: 0;
     width: 400px;
     height: 250px;
-    background: url(../images/shapes/shap-02.png);
+    /*background: url(../images/shapes/shap-02.png);*/
     background-repeat: no-repeat;
     transform: rotate(-30deg);
 }
@@ -786,7 +811,7 @@ header .menu.active::before {
     bottom: -50px;
     width: 400px;
     height: 250px;
-    background: url(../images/shapes/shap-02.png);
+    /*background: url(../images/shapes/shap-02.png);*/
     background-repeat: no-repeat;
     transform: rotate(6deg);
 }
