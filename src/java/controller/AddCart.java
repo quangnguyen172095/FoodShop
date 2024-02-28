@@ -77,7 +77,17 @@ public class AddCart extends HttpServlet {
         }
 
         String action = request.getParameter("action");
-        int productId = Integer.parseInt(request.getParameter("productID"));
+        String productIdStr = request.getParameter("productID");
+        if (productIdStr == null) {
+            Order order = (Order) session.getAttribute("order");
+            if (order == null) {
+                order = new Order();
+            }
+            session.setAttribute("order", order);
+            request.getRequestDispatcher("Cart.jsp").forward(request, response);
+            return;
+        }
+        int productId = Integer.parseInt(productIdStr);
         if (action == null || action.trim().equals("")) {
             //add
             // Lấy đối tượng Order từ session, hoặc tạo mới nếu chưa có

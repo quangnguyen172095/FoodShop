@@ -34,7 +34,7 @@
                                         </c:forEach>
                                         <c:choose>
                                             <c:when test="${sessionScope.ACC != null || sessionScope.CUS != null}">
-                                            <li><a href="Cart.jsp"><span class="flaticon-shopping-cart"></span></a></li>
+                                            <li><a href="cart"><span class="flaticon-shopping-cart"></span></a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                             <li><a href="LoginController" class="disabled"><span class="flaticon-shopping-cart"></span></a></li>

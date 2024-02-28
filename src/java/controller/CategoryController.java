@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DAOHome;
 import dal.DAOProducts;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.Categories;
+import model.HeaderHome;
 import model.Products;
 
 
@@ -60,6 +62,9 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         String categoryId = request.getParameter("cid");
         int cid = Integer.parseInt(categoryId);
         DAOProducts dao = new DAOProducts();
