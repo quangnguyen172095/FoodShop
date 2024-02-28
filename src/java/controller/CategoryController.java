@@ -65,7 +65,7 @@ public class CategoryController extends HttpServlet {
         DAOProducts dao = new DAOProducts();
         ArrayList<Products> listProductByCategory = dao.searchProductByCategory(cid);
         ArrayList<Categories> listCategories = dao.getCategories();
-        request.setAttribute("listProduct", listProductByCategory);
+        request.setAttribute("listbypage", listProductByCategory);
         request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }

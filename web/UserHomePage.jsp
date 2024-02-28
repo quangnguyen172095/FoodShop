@@ -34,11 +34,9 @@
                         <div class="my-nav">
                             <div class="menu">
                                 <ul>
-                                    <li><a href="home">Home</a></li>
-                                    <li><a href="#about-us">About us</a></li>
-                                    <li><a href="menu">Our Menu</a></li>
-                                    <li><a href="#blog">Blog</a></li>
-                                    <li><a href="#contact">Contact Us</a></li>
+                                    <c:forEach var="menuItem" items="${listHeader}">
+                                        <li><a href="<c:out value='${menuItem.link}'/>"><c:out value='${menuItem.title}'/></a></li>
+                                        </c:forEach>
                                         <c:choose>
                                             <c:when test="${sessionScope.ACC != null || sessionScope.CUS != null}">
                                             <li><a href="Cart.jsp"><span class="flaticon-shopping-cart"></span></a></li>
@@ -47,7 +45,6 @@
                                             <li><a href="LoginController" class="disabled"><span class="flaticon-shopping-cart"></span></a></li>
                                                 </c:otherwise>
                                             </c:choose>
-                                    <li><a href="menu">Booking Now</a></li>
                                     <li>
                                         <c:if test="${sessionScope.ACC != null || sessionScope.CUS != null}">
                                             <c:choose>
@@ -179,51 +176,7 @@
                 </div>
             </section>
             <!-- --------------------------------------------------------------------------- -->
-            <section class="bg-01">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icon">
-                                        <span class="flaticon-clock"></span>
-                                    </div>
-                                    <div class="sentence">
-                                        <strong>Today 10:00 am-7:00 pm</strong>
-                                        <p>Working Hours</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icon">
-                                        <span class="flaticon-pin"></span>
-                                    </div>
-                                    <div class="sentence">
-                                        <strong>Arcadia USA</strong>
-                                        <p>Get Directions</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icon">
-                                        <span class="flaticon-call"></span>
-                                    </div>
-                                    <div class="sentence">
-                                        <strong>419-704-4407</strong>
-                                        <p>Call Online</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
             <!-- --------------------------------------------------------------------------- -->
             <section class="bg-02" id="about-us">
                 <div class="shape-02"></div>
@@ -258,64 +211,7 @@
                 </div>
             </section>
             <!-- --------------------------------------------------------------------------- -->
-            <section class="bg-03">
-                <div class="shape-05"></div>
-                <div class="shape-06"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="heading">
-                                <span>Work</span>
-                                <h2>How It Works</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                    Asperiores officiis explicabo blanditiis consequuntur fugit 
-                                    fugiat, incidunt totam consectetur veritatis minus corporis
-                                    doloribus, qui maxime velit nesciunt, officia praesentium odit 
-                                    facilis.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icons">
-                                        <span class="flaticon-fish"></span>
-                                    </div>
-                                    <h3>Pick Meals</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                        Asperiores officiis explicabo blanditiis consequuntur fugit 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icons">
-                                        <span class="flaticon-touch"></span>
-                                    </div>
-                                    <h3>choose How Often</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                        Asperiores officiis explicabo blanditiis consequuntur fugit 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="wrapper">
-                                <div class="content">
-                                    <div class="icons">
-                                        <span class="flaticon-catering"></span>
-                                    </div>
-                                    <h3>Fast Deliveries</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                        Asperiores officiis explicabo blanditiis consequuntur fugit 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
             <!-- --------------------------------------------------------------------------- -->
             <section class="bg-04" id="our-menu">
                 <div class="container">
@@ -637,7 +533,7 @@
     </div>
 </section>
 <!-- -------------------------------------------------------------------- -->
-<section class="bg-06" id="blog">
+<!--<section class="bg-06" id="blog">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -718,7 +614,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 <!-- ------------------------------------------------------------------ -->
 
 </section>

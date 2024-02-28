@@ -21,6 +21,7 @@ import model.Products;
  */
 public class DAOProducts extends DBContext {
 
+
     public Products findById(int pid) {
         Products pro = null;
         String sql = "select * from products where ProductID =" + pid;
@@ -48,6 +49,7 @@ public class DAOProducts extends DBContext {
         }
         return pro;
     }
+    
 
     public void updateAmounProduct(int amount, int productID) {
         String query = "UPDATE Products SET Quantity = ? WHERE ProductID = ?";

@@ -10,6 +10,7 @@ import model.Customer;
 import model.Order;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import dal.DAOHome;
 import dal.DAOOrder;
 import dal.DAOOrderDetail;
 import dal.DAOProducts;
@@ -32,6 +33,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.Date;
+import model.HeaderHome;
 import model.OrderDetail;
 import model.Products;
 
@@ -76,6 +78,9 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         Customer a = (Customer) session.getAttribute("CUS");
         Order order = (Order) session.getAttribute("order");
         float total = 0;
@@ -96,12 +101,12 @@ public class CheckoutController extends HttpServlet {
                     String paymentMethod = request.getParameter("paymentMethod");
                     try {
                         handleCheckout(session, a, order, address, order.getTotalPrice(), paymentMethod);
-                        request.setAttribute("message", "Order successfull!");
+                        request.setAttribute("message", "Thanh toán thành công!");
                     } catch (Exception e) {
-                        request.setAttribute("errorMessage", "Order failed!");
+                        request.setAttribute("errorMessage", "Thanh toán thất bại!");
                     }
                 } else if (respCode != null && !respCode.equals("00")) {
-                    request.setAttribute("errorMessage", "Order failed!");
+                    request.setAttribute("errorMessage", "Thanh toán thất bại!");
                 }
 
                 request.getRequestDispatcher("Checkout.jsp").forward(request, response);
@@ -120,6 +125,9 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
         String address = request.getParameter("address");
         String paymentMethod = request.getParameter("paymentMethod");
         HttpSession session = request.getSession();
@@ -137,10 +145,10 @@ public class CheckoutController extends HttpServlet {
                 //cod
                 try {
                     handleCheckout(session, c, order, address, order.getTotalPrice(), paymentMethod);
-                    request.setAttribute("message", "Order successfull!");
+                    request.setAttribute("message", "Thanh toán thành công!");
                     request.getRequestDispatcher("Checkout.jsp").forward(request, response);
                 } catch (Exception e) {
-                    request.setAttribute("errorMessage", "Order failed!");
+                    request.setAttribute("errorMessage", "Thanh toán thất bại!");
                     request.getRequestDispatcher("Checkout.jsp").forward(request, response);
                 }
 

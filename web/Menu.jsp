@@ -29,11 +29,9 @@
                         <div class="my-nav">
                             <div class="menu">
                                 <ul>
-                                    <li><a href="home">Home</a></li>
-                                    <li><a href="#about-us">About us</a></li>
-                                    <li><a href="menu">Our Menu</a></li>
-                                    <li><a href="#blog">Blog</a></li>
-                                    <li><a href="#contact">Contact Us</a></li>
+                                    <c:forEach var="menuItem" items="${listHeader}">
+                                        <li><a href="<c:out value='${menuItem.link}'/>"><c:out value='${menuItem.title}'/></a></li>
+                                        </c:forEach>
                                         <c:choose>
                                             <c:when test="${sessionScope.ACC != null || sessionScope.CUS != null}">
                                             <li><a href="Cart.jsp"><span class="flaticon-shopping-cart"></span></a></li>
@@ -42,17 +40,16 @@
                                             <li><a href="LoginController" class="disabled"><span class="flaticon-shopping-cart"></span></a></li>
                                                 </c:otherwise>
                                             </c:choose>
-                                    <li><a href="menu">Booking Now</a></li>
                                     <li>
                                         <c:if test="${sessionScope.ACC != null || sessionScope.CUS != null}">
                                             <c:choose>
                                                 <c:when test="${sessionScope.CUS != null}">
                                                     <a href="DetailAccountController">
-                                                        <i class="fa"></i>Hello ${sessionScope.CUS.getFullName()}
+                                                        <i class="fa"></i>Xin chào ${sessionScope.CUS.getFullName()}
                                                     </a>
                                                 </c:when>
                                             </c:choose>
-                                            <a class="bk-btn" href="LogoutController">Logout</a>
+                                            <a class="bk-btn" href="LogoutController">Đăng xuất</a>
                                         </c:if>
                                         <c:if test="${sessionScope.ACC == null && sessionScope.CUS == null}">
                                             <a href="LoginController" class="bk-btn">Đăng nhập</a>
@@ -72,7 +69,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
-                                <c:forEach items="${listProduct}" var="l">
+                                <c:forEach items="${listbypage}" var="l">
                                     <div class="col-md-4 col-sm-6">
                                         <div class="wrapper">
                                             <div class="tab-content">
@@ -131,7 +128,14 @@
 
             </section>
         </main>
-
+        <!--phantrang-->
+        <div class="pagination-container">
+            <div class="pagination">
+                <c:forEach begin="1" end="${endpage}" var="i">
+                    <a href="menu?index=${i}">${i}</a>
+                </c:forEach>
+            </div>
+        </div>
 
         <footer>
             <div class="container">
