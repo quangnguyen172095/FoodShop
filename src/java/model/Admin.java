@@ -19,6 +19,14 @@ public class Admin {
     public Admin() {
     }
 
+    public Admin(String fullName, String role, String image) {
+        this.fullName = fullName;
+        this.role = role;
+        this.image = image;
+    }
+    
+    
+
     public Admin(int adminId, String fullName, String username, String password, String email, String phone, String role, String image, Date joinedDate, String address, String department) {
         this.adminId = adminId;
         this.fullName = fullName;

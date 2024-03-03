@@ -13,9 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import model.Admin;
+import model.ContentHome;
 import model.HeaderHome;
 import model.Products;
-
 
 /**
  *
@@ -40,7 +41,7 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductsController</title>");            
+            out.println("<title>Servlet ProductsController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProductsController at " + request.getContextPath() + "</h1>");
@@ -64,6 +65,32 @@ public class HomeController extends HttpServlet {
         DAOProducts dao = new DAOProducts();
         ArrayList<Products> listProductHome = dao.gettop6Products();
         DAOHome dh = new DAOHome();
+        
+        //content aboutus
+        ContentHome ch1 = dh.getContentById(4);
+        request.setAttribute("ch1", ch1);
+        
+        //content menu
+        ContentHome ch2 = dh.getContentById(5);
+        request.setAttribute("ch2", ch2);
+        
+        //content team
+        ContentHome ch3 = dh.getContentById(6);
+        request.setAttribute("ch3", ch3);
+        
+        //list chef
+        ArrayList<Admin> admins = dh.getChef();
+        request.setAttribute("admins", admins);
+        
+        //content footer
+        ContentHome ch4 = dh.getContentById(7);
+        request.setAttribute("ch4", ch4);
+        
+        
+        
+        //content slide
+        ArrayList<ContentHome> listContent = dh.getContent();
+        request.setAttribute("listContent", listContent);
         ArrayList<HeaderHome> listHeader = dh.getHeader();
         request.setAttribute("listHeader", listHeader);
         request.setAttribute("listProductHome", listProductHome);
@@ -82,11 +109,35 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
-        DAOHome dh = new DAOHome();
-        ArrayList<HeaderHome> listHeader = dh.getHeader();
         ArrayList<Products> listProductHome = dao.gettop6Products();
-        request.setAttribute("listProductHome", listProductHome);
+        DAOHome dh = new DAOHome();
+        
+        //content aboutus
+        ContentHome ch1 = dh.getContentById(4);
+        request.setAttribute("ch1", ch1);
+        
+        //content menu
+        ContentHome ch2 = dh.getContentById(5);
+        request.setAttribute("ch2", ch2);
+        
+        //content team
+        ContentHome ch3 = dh.getContentById(6);
+        request.setAttribute("ch3", ch3);
+        
+        //list chef
+        ArrayList<Admin> admins = dh.getChef();
+        request.setAttribute("admins", admins);
+        
+        //content footer
+        ContentHome ch4 = dh.getContentById(7);
+        request.setAttribute("ch4", ch4);
+        
+        //content slide
+        ArrayList<ContentHome> listContent = dh.getContent();
+        request.setAttribute("listContent", listContent);
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
         request.setAttribute("listHeader", listHeader);
+        request.setAttribute("listProductHome", listProductHome);
         request.getRequestDispatcher("UserHomePage.jsp").forward(request, response);
     }
 
