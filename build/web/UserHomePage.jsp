@@ -78,100 +78,40 @@
                 <div class="shape"></div>
                 <div class="shape-01"></div>
                 <div class="banner">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <c:forEach var="item" items="${listContent}" varStatus="status">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="${status.index}" class="${status.index == 0 ? 'active' : ''}"></li>
+                                </c:forEach>
                         </ol>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <div class="content">
-                                                    <h1>your favourite food delivered & fresh</h1>
-                                                    <h5>Lorem ipsum dolor sit, amet consectetur 
-                                                        adipisicing elit. Consequuntur, natus magnam 
-                                                        incidunt iste, architecto voluptate amet veniam 
-                                                        odio, reiciendis modi</h5>
-                                                    <ol>
-                                                        <li><a href="menu">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
-                                                    </ol>
+                            <c:forEach var="item" items="${listContent}" varStatus="status">
+                                <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="wrapper">
+                                                    <div class="content">
+                                                        <h1>${item.getIntroduce()}</h1>
+                                                        <h5>${item.getDescriptionIntro()}</h5>
+                                                        <ol>
+                                                            <li><a href="menu">${item.getButtonText()}<span class="flaticon-right-arrow"></span></a></li>
+                                                        </ol>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <img src="assets/images/slider/slide-01.png">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="wrapper">
+                                                    <img src="<c:url value='/assets/images/slider/${item.getImage()}'/>">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <div class="content">
-                                                    <h1>your favourite food delivered & fresh</h1>
-                                                    <h5>Lorem ipsum dolor sit, amet consectetur 
-                                                        adipisicing elit. Consequuntur, natus magnam 
-                                                        incidunt iste, architecto voluptate amet veniam 
-                                                        odio, reiciendis modi</h5>
-                                                    <ol>
-                                                        <li><a href="#">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <img src="assets/images/slider/slide-02.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <div class="content">
-                                                    <h1>your favourite food delivered & fresh</h1>
-                                                    <h5>Lorem ipsum dolor sit, amet consectetur 
-                                                        adipisicing elit. Consequuntur, natus magnam 
-                                                        incidunt iste, architecto voluptate amet veniam 
-                                                        odio, reiciendis modi</h5>
-                                                    <ol>
-                                                        <li><a href="#">Đặt Hàng Ngay<span class="flaticon-right-arrow"></span></a></li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="wrapper">
-                                                <img src="assets/images/slider/slide-03.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+
                     </div>
                 </div>
             </section>
@@ -187,23 +127,16 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="wrapper">
                                 <div class="image">
-                                    <img src="assets/images/about.png">
+                                    <img src="assets/images/${ch1.getImage()}">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="content">
-                                <span>About</span>
-                                <h2>Food Is Important part of a balanced diet</h2>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                                    Provident expedita et laudantium excepturi. Quia obcaecati 
-                                    alias a sunt, magnam sint voluptate sequi</p>
-
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                                    Provident expedita et laudantium excepturi. Quia obcaecati 
-                                    alias a sunt, magnam sint voluptate sequi</p>
+                                <h2>${ch1.getIntroduce()}</h2>
+                                <p>${ch1.getDescriptionIntro()}</p>
                                 <ol>
-                                    <li><a href="#">Learn More</a></li>
+                                    <li><a href="#">${ch1.getButtonText()}</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -218,13 +151,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="heading">
-                                <span>Menu</span>
-                                <h2>Explore Our Best Menu</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                    Asperiores officiis explicabo blanditiis consequuntur fugit 
-                                    fugiat, incidunt totam consectetur veritatis minus corporis
-                                    doloribus, qui maxime velit nesciunt, officia praesentium odit 
-                                    facilis.</p>
+                                <h2>${ch2.getIntroduce()}</h2>
+                                <p>${ch2.getDescriptionIntro()}</p>
                             </div>
                         </div>
 
@@ -438,97 +366,28 @@
         <div class="row">
             <div class="col-12">
                 <div class="heading">
-                    <span>Team</span>
-                    <h2>Explore Our Team</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                        Asperiores officiis explicabo blanditiis consequuntur fugit 
-                        fugiat, incidunt totam consectetur veritatis minus corporis
-                        doloribus, qui maxime velit nesciunt, officia praesentium odit 
-                        facilis.</p>
+                    <h2>${ch3.getIntroduce()}</h2>
+                    <p>${ch3.getDescriptionIntro()}</p>
                 </div>
             </div>
 
             <div class="main-team-card d-flex">
-                <div class="team-setup">
-                    <div class="team-items">
-                        <div class="team-user">
-                            <img src="assets/images/team/1.jpg">
-                        </div>
-                        <div class="team-user-social">
-                            <ol>
-                                <li><i class="flaticon-facebook"></i></li>
-                                <li><i class="flaticon-twitter"></i></li>
-                                <li><i class="flaticon-behance"></i></li>
-                                <li><i class="flaticon-youtube"></i></li>
-                            </ol>
-                        </div>
-                        <div class="team-name">
-                            <h2>Mark Anthony</h2>
-                            <b>Founder & CEO</b>
+                <c:forEach items="${admins}" var="member">
+                    <div class="team-setup">
+                        <div class="team-items">
+                            <div class="team-user">
+                                <img src="assets/images/team/${member.getImage()}">
+                            </div>
+                            <div class="team-name">
+                                <h2>${member.getFullName()}</h2>
+                                <b>${member.getRole()}</b>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="team-setup">
-                    <div class="team-items">
-                        <div class="team-user">
-                            <img src="assets/images/team/2.jpg">
-                        </div>
-                        <div class="team-user-social">
-                            <ol>
-                                <li><i class="flaticon-facebook"></i></li>
-                                <li><i class="flaticon-twitter"></i></li>
-                                <li><i class="flaticon-behance"></i></li>
-                                <li><i class="flaticon-youtube"></i></li>
-                            </ol>
-                        </div>
-                        <div class="team-name">
-                            <h2>Jessica Lee</h2>
-                            <b>Chinese Kitchen Lead</b>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="team-setup">
-                    <div class="team-items">
-                        <div class="team-user">
-                            <img src="assets/images/team/3.jpg">
-                        </div>
-                        <div class="team-user-social">
-                            <ol>
-                                <li><i class="flaticon-facebook"></i></li>
-                                <li><i class="flaticon-twitter"></i></li>
-                                <li><i class="flaticon-behance"></i></li>
-                                <li><i class="flaticon-youtube"></i></li>
-                            </ol>
-                        </div>
-                        <div class="team-name">
-                            <h2>John Bennett</h2>
-                            <b>French Kitchen Lead</b>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="team-setup">
-                    <div class="team-items">
-                        <div class="team-user">
-                            <img src="assets/images/team/4.jpg">
-                        </div>
-                        <div class="team-user-social">
-                            <ol>
-                                <li><i class="flaticon-facebook"></i></li>
-                                <li><i class="flaticon-twitter"></i></li>
-                                <li><i class="flaticon-behance"></i></li>
-                                <li><i class="flaticon-youtube"></i></li>
-                            </ol>
-                        </div>
-                        <div class="team-name">
-                            <h2>ANDERSON JHON</h2>
-                            <b>Sous Chef</b>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
+
+
         </div>
     </div>
 </section>
@@ -631,11 +490,10 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="footer-content">
-                    <h2>SMART CHARITABLES</h2>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime adipisci veniam
-                        voluptatum voluptatem sed ex error beatae, asperiores dignissimos?</p>
+                    <h2>${ch4.getIntroduce()}</h2>
+                    <p>${ch4.getDescriptionIntro()}</p>
                     <ul>
                         <li><i class="flaticon-facebook"></i></li>
                         <li><i class="flaticon-twitter"></i></li>
@@ -644,31 +502,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="footer-content">
-                    <h2>Quick Links</h2>
                     <ol>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Home</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>About Us</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Services</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Blog</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Contact Us</a></li>
+                        <c:forEach var="link" items="${listHeader}">
+                            <li><a href="${link.getLink()}"><i class="flaticon-double-right-arrows-angles"></i>${link.getTitle()}</a></li>
+                                </c:forEach>
                     </ol>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <div class="footer-content">
-                    <h2>Services</h2>
-                    <ol>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Home</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>About Us</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Services</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Blog</a></li>
-                        <li><a href="#"><i class="flaticon-double-right-arrows-angles"></i>Contact Us</a></li>
-                    </ol>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="footer-content">
                     <h2>News Letters</h2>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
@@ -683,8 +527,7 @@
     <div class="copy-right">
         <div class="container">
             <div class="copy-right-card">
-                <p>2020 @ All Rights Reserved Designed and developed by<a
-                        href="https://www.smarteyeapps.com">SmarteyeTechnologies</a></p>
+                <p>2020 @ All Rights Reserved Designed and developed by <a href="https://www.smarteyeapps.com">SmarteyeTechnologies</a></p>
             </div>
         </div>
     </div>

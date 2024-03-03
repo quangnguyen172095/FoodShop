@@ -103,7 +103,7 @@
                                         <div class="cart-summary">
                                             <h5>Chi tiết hóa đơn</h5>
                                             <ul class="summary-table mt-3">
-                                                <li><span>Subtotal:</span> <span></span></li>
+                                                <li><span>Sản phẩm:</span> <span></span></li>
 
                                                 <c:forEach items="${sessionScope.order.getOrderDetails()}" var="i">
                                                     <li><div>
@@ -116,14 +116,14 @@
                                                     </li>
                                                 </c:forEach>
 
-                                                <li><span>Total:</span><div style="float: right"><span>${Math.round(sessionScope.order.getTotalPrice()*100)/100} VNÐ</span></div></li>
+                                                <li><span>Tổng tiền:</span><div style="float: right"><span>${Math.round(sessionScope.order.getTotalPrice()*100)/100} VNÐ</span></div></li>
                                             </ul>
 
                                             <div class="payment-method mt-3">
                                                 <!-- Cash on delivery -->
                                                 <div class="custom-control custom-checkbox mr-sm-2">
                                                     <input type="radio" class="custom-control-input" id="cod" name="paymentMethod" value="1" checked>
-                                                    <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                                                    <label class="custom-control-label" for="cod">Thanh toán khi giao hàng</label>
                                                 </div>
                                                 <!-- Paypal -->
                                                 <div class="custom-control custom-checkbox mr-sm-2">

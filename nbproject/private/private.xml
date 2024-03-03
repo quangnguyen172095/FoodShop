@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/src/java/controller/CheckoutController.java</file>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/src/java/model/Customer.java</file>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/src/java/dal/DAOProducts.java</file>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/src/java/dal/DAOOrder.java</file>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/web/Cart.jsp</file>
+            <file>file:/C:/Users/PC/Downloads/1_SWP391/Project/swpfoodshop/src/java/dal/DAOOrderDetail.java</file>
+        </group>
     </open-files>
 </project-private>
