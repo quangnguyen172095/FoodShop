@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 import model.Categories;
-import model.Products;
+import model.Product;
 
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/AddProductServlet"})
 public class AddProductServlet extends HttpServlet {
@@ -59,7 +59,7 @@ public class AddProductServlet extends HttpServlet {
             category.setCategoryID(categoryId);
 
             // Create a Product object
-            Products product = new Products();
+            Product product = new Product();
             product.setProductName(productName);
             product.setQuantity(quantity);
             product.setCategories(category);

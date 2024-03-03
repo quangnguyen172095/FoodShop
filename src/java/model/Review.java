@@ -5,8 +5,8 @@ import java.sql.Date;
 public class Review {
 
     private int reviewId;
-    private Customer customer;
-    private Products product;
+    private Customers customer;
+    private Product product;
     private String title;
     private String description;
     int rate;
@@ -15,7 +15,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(int reviewId, Customer customer, Products product, String title, String description, int rate, Date reviewDate) {
+    public Review(int reviewId, Customers customer, Product product, String title, String description, int rate, Date reviewDate) {
         this.reviewId = reviewId;
         this.customer = customer;
         this.product = product;
@@ -29,11 +29,11 @@ public class Review {
         return reviewId;
     }
 
-    public Customer getCustomer() {
+    public Customers getCustomer() {
         return customer;
     }
 
-    public Products getProduct() {
+    public Product getProduct() {
         return product;
     }
 
@@ -57,11 +57,11 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Customers customer) {
         this.customer = customer;
     }
 
-    public void setProduct(Products product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

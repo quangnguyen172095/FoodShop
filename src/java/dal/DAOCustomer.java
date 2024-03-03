@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Customer;
+import model.Customers;
 
 /**
  *
@@ -20,7 +20,7 @@ public class DAOCustomer extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public Customer checkCustomerExist(String user) {
+    public Customers checkCustomerExist(String user) {
         String query = "select * from Customers where Username = ?";
 
         try {
@@ -28,7 +28,7 @@ public class DAOCustomer extends DBContext {
             ps.setString(1, user);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Customer(rs.getInt("CustomerID"),
+                return new Customers(rs.getInt("CustomerID"),
                         rs.getString("FullName"),
                         rs.getString("Phone"),
                         rs.getString("Email"),
@@ -56,7 +56,7 @@ public class DAOCustomer extends DBContext {
         }
     }
 
-    public Customer login(String username, String password) throws SQLException {
+    public Customers login(String username, String password) throws SQLException {
         String sql = "select * from Customers\n"
                 + "where Username = ? and Password = ?";
 
@@ -66,7 +66,7 @@ public class DAOCustomer extends DBContext {
             ps.setString(2, password);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new Customer(rs.getInt("CustomerID"),
+                return new Customers(rs.getInt("CustomerID"),
                         rs.getString("FullName"),
                         rs.getString("Phone"),
                         rs.getString("Email"),
@@ -80,7 +80,7 @@ public class DAOCustomer extends DBContext {
         return null;
     }
 
-    public Customer getById(Integer userId) throws SQLException {
+    public Customers getById(Integer userId) throws SQLException {
         String sql = "select * from Customers where CustomerID = ?";
 
         if (con != null) {
@@ -88,7 +88,7 @@ public class DAOCustomer extends DBContext {
             ps.setInt(1, userId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new Customer(rs.getInt("CustomerID"),
+                return new Customers(rs.getInt("CustomerID"),
                         rs.getString("Fullname"),
                         rs.getString("Username"),
                         rs.getString("Password"),
@@ -101,7 +101,7 @@ public class DAOCustomer extends DBContext {
         return null;
     }
 
-    public Customer updateCusAccount(Customer account) throws SQLException {
+    public Customers updateCusAccount(Customers account) throws SQLException {
         String sql = "UPDATE Customers\n"
                 + "SET\n"
                 + "    Username = ?,\n"
@@ -130,7 +130,7 @@ public class DAOCustomer extends DBContext {
         return null;
     }
 
-    public void InsertCustomer(Customer customer) {
+    public void InsertCustomer(Customers customer) {
         String sql = "INSERT INTO [dbo].[Customers]\n"
                 + "                                ([FullName]\n"
                 + "                                ,[Phone]\n"
@@ -178,8 +178,8 @@ public class DAOCustomer extends DBContext {
         return 0;
     }
 
-    public List<Customer> pagingCustomer(int index) {
-        List<Customer> list = new ArrayList<>();
+    public List<Customers> pagingCustomer(int index) {
+        List<Customers> list = new ArrayList<>();
         String sql = "SELECT * FROM Customers\n"
                 + "                       ORDER BY CustomerID\n"
                 + "                       OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY";
@@ -188,7 +188,7 @@ public class DAOCustomer extends DBContext {
             st.setInt(1, (index - 1) * 10);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Customer customer = new Customer();
+                Customers customer = new Customers();
                 customer.setCustomerId(rs.getInt("CustomerID"));
                 customer.setFullName(rs.getString("Fullname"));
                 customer.setPhone(rs.getString("Phone"));
@@ -204,7 +204,7 @@ public class DAOCustomer extends DBContext {
         return list;
     }
 
-    public Customer GetCustomerById(int customerId) {
+    public Customers GetCustomerById(int customerId) {
         String sql = "SELECT [CustomerID]\n"
                 + "                          ,[FullName]\n"
                 + "                          ,[Phone]\n"
@@ -220,7 +220,7 @@ public class DAOCustomer extends DBContext {
             st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Customer customer = new Customer();
+                Customers customer = new Customers();
                 customer.setCustomerId(rs.getInt("CustomerID"));
                 customer.setFullName(rs.getString("Fullname"));
                 customer.setPhone(rs.getString("Phone"));
@@ -236,7 +236,7 @@ public class DAOCustomer extends DBContext {
         return null;
     }
 
-    public void UpdateCustomer(Customer customer) {
+    public void UpdateCustomer(Customers customer) {
         String sql = "UPDATE [dbo].[Customers]\n"
                 + "                                            SET [FullName] = ?\n"
                 + "                                               ,[Phone] = ?\n"
@@ -262,7 +262,7 @@ public class DAOCustomer extends DBContext {
         }
     }
 
-    public Customer SearchByID(int customersID) {
+    public Customers SearchByID(int customersID) {
         String sql = "SELECT *  FROM [dbo].[Customers] WHERE CustomerID = ?";
         PreparedStatement stm;
         ResultSet rs;
@@ -271,7 +271,7 @@ public class DAOCustomer extends DBContext {
             stm.setInt(1, customersID);
             rs = stm.executeQuery();
             if (rs.next()) {
-                Customer foundCustomers = new Customer();
+                Customers foundCustomers = new Customers();
                 foundCustomers.setCustomerId(rs.getInt("CustomerID"));
                 foundCustomers.setFullName(rs.getString("FullName"));
                 foundCustomers.setPhone(rs.getString("Phone"));

@@ -12,7 +12,7 @@ import model.Admin;
 import model.Categories;
 import model.ContentHome;
 import model.HeaderHome;
-import model.Products;
+import model.Product;
 
 /**
  *

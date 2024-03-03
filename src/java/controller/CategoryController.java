@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.Categories;
 import model.HeaderHome;
-import model.Products;
+import model.Product;
 
 
 /**
@@ -68,7 +68,7 @@ public class CategoryController extends HttpServlet {
         String categoryId = request.getParameter("cid");
         int cid = Integer.parseInt(categoryId);
         DAOProducts dao = new DAOProducts();
-        ArrayList<Products> listProductByCategory = dao.searchProductByCategory(cid);
+        ArrayList<Product> listProductByCategory = dao.searchProductByCategory(cid);
         ArrayList<Categories> listCategories = dao.getCategories();
         request.setAttribute("listbypage", listProductByCategory);
         request.setAttribute("listCategories", listCategories);

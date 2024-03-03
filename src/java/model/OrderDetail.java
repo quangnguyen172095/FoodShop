@@ -17,7 +17,7 @@ public class OrderDetail {
     private float price;
     private String image;
     private Order orders;
-    private Products products;
+    private Product products;
     private float getTotalPrice;
     private float discount;
 
@@ -30,7 +30,7 @@ public class OrderDetail {
     }
     
     
-    public OrderDetail(Order orders, Products products, int quantity) {
+    public OrderDetail(Order orders, Product products, int quantity) {
         this.orders = orders;
         this.products = products;
         this.Quantity = quantity;
@@ -124,11 +124,11 @@ public class OrderDetail {
         this.orders = orders;
     }
 
-    public Products getProducts() {
+    public Product getProducts() {
         return products;
     }
 
-    public void setProducts(Products products) {
+    public void setProducts(Product products) {
         this.products = products;
     }
     

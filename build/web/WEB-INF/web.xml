@@ -76,9 +76,49 @@
         <servlet-name>ListProductServlet</servlet-name>
         <url-pattern>/ListProductServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DetailServlet</servlet-name>
+        <servlet-class>controller.DetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <servlet-class>controller.OrderManagementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <servlet-class>controller.CreateOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailServlet</servlet-name>
+        <servlet-class>controller.EmailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActionServlet</servlet-name>
+        <servlet-class>controller.ActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DetailServlet</servlet-name>
+        <url-pattern>/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <url-pattern>/ordermanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailServlet</servlet-name>
+        <url-pattern>/email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionServlet</servlet-name>
+        <url-pattern>/action</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 </web-app>

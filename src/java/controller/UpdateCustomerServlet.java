@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Customer;
+import model.Customers;
 
 @WebServlet(name = "UpdateCustomerServlet", urlPatterns = {"/UpdateCustomerServlet"})
 public class UpdateCustomerServlet extends HttpServlet {
@@ -37,7 +37,7 @@ public class UpdateCustomerServlet extends HttpServlet {
         DAOCustomer customerDAO = new DAOCustomer();
         try {
             customerId = Integer.parseInt(id_raw);
-            Customer customer = customerDAO.GetCustomerById(customerId);
+            Customers customer = customerDAO.GetCustomerById(customerId);
             request.setAttribute("customer", customer);
             request.getRequestDispatcher("updateCustomer.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException e) {
@@ -58,8 +58,8 @@ public class UpdateCustomerServlet extends HttpServlet {
             DAOCustomer customerDAO = new DAOCustomer();
             int customerId = Integer.parseInt(id_raw);
 
-            Customer oldCustomer = customerDAO.GetCustomerById(customerId);
-            Customer newCustomer = new Customer(customerId, fullName, phone, email, oldCustomer.getImage(), username, password, address);
+            Customers oldCustomer = customerDAO.GetCustomerById(customerId);
+            Customers newCustomer = new Customers(customerId, fullName, phone, email, oldCustomer.getImage(), username, password, address);
             customerDAO.UpdateCustomer(newCustomer);
         } catch (NumberFormatException e) {
         }

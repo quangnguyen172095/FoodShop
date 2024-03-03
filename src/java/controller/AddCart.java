@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import model.Customer;
+import model.Customers;
 import model.HeaderHome;
 import model.Order;
 import model.OrderDetail;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -70,7 +70,7 @@ public class AddCart extends HttpServlet {
         DAOHome dh = new DAOHome();
         ArrayList<HeaderHome> listHeader = dh.getHeader();
         request.setAttribute("listHeader", listHeader);
-        Customer cus = (Customer) session.getAttribute("CUS");
+        Customers cus = (Customers) session.getAttribute("CUS");
         if (cus == null) {
             response.sendRedirect("LoginController");
             return;
@@ -95,7 +95,7 @@ public class AddCart extends HttpServlet {
             if (order == null) {
                 order = new Order();
             }
-            Products p = new DAOProducts().findById(productId);
+            Product p = new DAOProducts().findById(productId);
             order.addItems(p);
             session.setAttribute("order", order);
             request.getRequestDispatcher("Cart.jsp").forward(request, response);

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Customer;
+import model.Customers;
 
 @WebServlet(name = "ListCustomerServlet", urlPatterns = {"/ListCustomerServlet"})
 public class ListCustomerServlet extends HttpServlet {
@@ -33,7 +33,7 @@ public class ListCustomerServlet extends HttpServlet {
         if (count % 10 != 0) {
             endPage++;
         }
-        List<Customer> list = customerDAO.pagingCustomer(index);
+        List<Customers> list = customerDAO.pagingCustomer(index);
         request.setAttribute("customers", list);
         request.setAttribute("endP", endPage);
         request.setAttribute("tag", index);

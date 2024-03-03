@@ -4,223 +4,54 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
- * @author PC
+ * @author acer
  */
 public class Products {
-    private int ProductID;
-    private int CategoryID;
-    private String ProductName;
-    private String Image;
-    private String Description;
-    private float Price;
-    private int Quantity;
-    private String Status;
-    private float Discount;
-    private int CreatedBy;
-    private Date CreatedOn;
-    private int ModifiedBy;
-    private Date ModifiedOn;
+
+    private int productID;
     private Categories categories;
-    private Admin createdAdminInfo;
-    private Admin modifiedAdminInfo;
+    private String productName;
+    private String image;
+    private String description;
+    private double price;
+    private int quantity;
+    private String status;
+    private double discount;
+    private Admin createdBy;
+    private Timestamp createdOn;
+    private Admin modifiedBy;
+    private Timestamp modifiedOn;
 
     public Products() {
     }
-    
-    
 
-    public Products(int ProductID, int CategoryID, String ProductName, String Image, String Description, float Price, int Quantity, String Status, float Discount, int CreatedBy, Date CreatedOn, int ModifiedBy, Date ModifiedOn, Categories categories) {
-        this.ProductID = ProductID;
-        this.CategoryID = CategoryID;
-        this.ProductName = ProductName;
-        this.Image = Image;
-        this.Description = Description;
-        this.Price = Price;
-        this.Quantity = Quantity;
-        this.Status = Status;
-        this.Discount = Discount;
-        this.CreatedBy = CreatedBy;
-        this.CreatedOn = CreatedOn;
-        this.ModifiedBy = ModifiedBy;
-        this.ModifiedOn = ModifiedOn;
+    public Products(int productID, Categories categories, String productName, String image, String description, double price, 
+            int quantity, String status, double discount, Admin createdBy, Timestamp createdOn, Admin modifiedBy, Timestamp modifiedOn) {
+        this.productID = productID;
         this.categories = categories;
+        this.productName = productName;
+        this.image = image;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.discount = discount;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.modifiedBy = modifiedBy;
+        this.modifiedOn = modifiedOn;
     }
-
-    public Products(int ProductID, int CategoryID, String ProductName, String Image, String Description, float Price, int Quantity, String Status, float Discount, int CreatedBy, Date CreatedOn, int ModifiedBy, Date ModifiedOn, Categories categories, Admin createdAdminInfo, Admin modifiedAdminInfo) {
-        this.ProductID = ProductID;
-        this.CategoryID = CategoryID;
-        this.ProductName = ProductName;
-        this.Image = Image;
-        this.Description = Description;
-        this.Price = Price;
-        this.Quantity = Quantity;
-        this.Status = Status;
-        this.Discount = Discount;
-        this.CreatedBy = CreatedBy;
-        this.CreatedOn = CreatedOn;
-        this.ModifiedBy = ModifiedBy;
-        this.ModifiedOn = ModifiedOn;
-        this.categories = categories;
-        this.createdAdminInfo = createdAdminInfo;
-        this.modifiedAdminInfo = modifiedAdminInfo;
-    }
-
-    public Admin getCreatedAdminInfo() {
-        return createdAdminInfo;
-    }
-
-    public void setCreatedAdminInfo(Admin createdAdminInfo) {
-        this.createdAdminInfo = createdAdminInfo;
-    }
-
-    public Admin getModifiedAdminInfo() {
-        return modifiedAdminInfo;
-    }
-
-    public void setModifiedAdminInfo(Admin modifiedAdminInfo) {
-        this.modifiedAdminInfo = modifiedAdminInfo;
-    }
-    
-    
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String Status) {
-        this.Status = Status;
-    }
-
-    public float getDiscount() {
-        return Discount;
-    }
-
-    public void setDiscount(float Discount) {
-        this.Discount = Discount;
-    }
-    
-    
-
-    public Products(int ProductID, int CategoryID, String ProductName, String Image, String Description, float Price, int Quantity, int CreatedBy, Date CreatedOn, int ModifiedBy, Date ModifiedOn) {
-        this.ProductID = ProductID;
-        this.CategoryID = CategoryID;
-        this.ProductName = ProductName;
-        this.Image = Image;
-        this.Description = Description;
-        this.Price = Price;
-        this.Quantity = Quantity;
-        this.CreatedBy = CreatedBy;
-        this.CreatedOn = CreatedOn;
-        this.ModifiedBy = ModifiedBy;
-        this.ModifiedOn = ModifiedOn;
-    }
-
-    public Products(int ProductID, int CategoryID, String ProductName, String Image, String Description, float Price, int Quantity, int CreatedBy, Date CreatedOn, int ModifiedBy, Date ModifiedOn, Categories categories) {
-        this.ProductID = ProductID;
-        this.CategoryID = CategoryID;
-        this.ProductName = ProductName;
-        this.Image = Image;
-        this.Description = Description;
-        this.Price = Price;
-        this.Quantity = Quantity;
-        this.CreatedBy = CreatedBy;
-        this.CreatedOn = CreatedOn;
-        this.ModifiedBy = ModifiedBy;
-        this.ModifiedOn = ModifiedOn;
-        this.categories = categories;
-    }
-    
-    
 
     public int getProductID() {
-        return ProductID;
+        return productID;
     }
 
-    public void setProductID(int ProductID) {
-        this.ProductID = ProductID;
-    }
-
-    public int getCategoryID() {
-        return CategoryID;
-    }
-
-    public void setCategoryID(int CategoryID) {
-        this.CategoryID = CategoryID;
-    }
-
-    public String getProductName() {
-        return ProductName;
-    }
-
-    public void setProductName(String ProductName) {
-        this.ProductName = ProductName;
-    }
-
-    public String getImage() {
-        return Image;
-    }
-
-    public void setImage(String Image) {
-        this.Image = Image;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public float getPrice() {
-        return Price;
-    }
-
-    public void setPrice(float Price) {
-        this.Price = Price;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
-    }
-
-    public int getCreatedBy() {
-        return CreatedBy;
-    }
-
-    public void setCreatedBy(int CreatedBy) {
-        this.CreatedBy = CreatedBy;
-    }
-
-    public Date getCreatedOn() {
-        return CreatedOn;
-    }
-
-    public void setCreatedOn(Date CreatedOn) {
-        this.CreatedOn = CreatedOn;
-    }
-
-    public int getModifiedBy() {
-        return ModifiedBy;
-    }
-
-    public void setModifiedBy(int ModifiedBy) {
-        this.ModifiedBy = ModifiedBy;
-    }
-
-    public Date getModifiedOn() {
-        return ModifiedOn;
-    }
-
-    public void setModifiedOn(Date ModifiedOn) {
-        this.ModifiedOn = ModifiedOn;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public Categories getCategories() {
@@ -231,10 +62,97 @@ public class Products {
         this.categories = categories;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public Admin getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Admin createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Admin getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(Admin modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public Timestamp getModifiedOn() {
+        return modifiedOn;
+    }
+
+    public void setModifiedOn(Timestamp modifiedOn) {
+        this.modifiedOn = modifiedOn;
+    }
+
     @Override
     public String toString() {
-        return "Products{" + "ProductID=" + ProductID + ", CategoryID=" + CategoryID + ", ProductName=" + ProductName + ", Image=" + Image + ", Description=" + Description + ", Price=" + Price + ", Quantity=" + Quantity + ", CreatedBy=" + CreatedBy + ", CreatedOn=" + CreatedOn + ", ModifiedBy=" + ModifiedBy + ", ModifiedOn=" + ModifiedOn + ", categories=" + categories + '}';
+        return "Products{" + "productID=" + productID + ", categories=" + categories + ", productName=" + productName + ", image=" + image + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", status=" + status + ", discount=" + discount + ", createdBy=" + createdBy + ", createdOn=" + createdOn + ", modifiedBy=" + modifiedBy + ", modifiedOn=" + modifiedOn + '}';
     }
-    
-    
+
 }

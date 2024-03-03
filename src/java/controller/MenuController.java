@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Categories;
 import model.HeaderHome;
-import model.Products;
+import model.Product;
 
 
 /**
@@ -75,7 +75,7 @@ public class MenuController extends HttpServlet {
         if(count%10!=0){
             endpage++;
         }
-        List<Products> listProductByPage = dao.pagingProduct(index);
+        List<Product> listProductByPage = dao.pagingProduct(index);
         ArrayList<Categories> listCategories = dao.getCategories();
         
         //header

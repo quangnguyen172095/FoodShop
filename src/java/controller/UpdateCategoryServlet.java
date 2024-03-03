@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Categories;
-import model.Customer;
+import model.Customers;
 
 
 /**

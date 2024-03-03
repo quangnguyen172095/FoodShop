@@ -19,7 +19,7 @@ import model.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import model.Customer;
+import model.Customers;
 
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
@@ -102,7 +102,7 @@ public class LoginController extends HttpServlet {
             AccountDAO accDao = new AccountDAO();
             Admin accDto = accDao.login(username, password);
             DAOCustomer cusDao = new DAOCustomer();
-            Customer cusDto = cusDao.login(username, password);
+            Customers cusDto = cusDao.login(username, password);
             HttpSession session = request.getSession();
             String msg = "";
             if (accDto == null && cusDto == null) {

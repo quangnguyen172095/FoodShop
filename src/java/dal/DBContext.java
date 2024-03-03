@@ -34,7 +34,7 @@ public class DBContext {
     
     public DBContext(){
        this("jdbc:sqlserver://localhost:1433;databaseName=SWP391_FOODSHOP_2",
-               "quangnguyen","minhquang2908");
+               "sa","admin");
     }
     
     public ResultSet getData(String sql){

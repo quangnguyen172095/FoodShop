@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import java.sql.Date;
-import model.Products;
+import model.Product;
 
 @WebServlet(name = "UpdateProductServlet", urlPatterns = {"/UpdateProductServlet"})
 public class UpdateProductServlet extends HttpServlet {
@@ -39,7 +39,7 @@ public class UpdateProductServlet extends HttpServlet {
         DAOProducts productDAO = new DAOProducts();
         try {
             productId = Integer.parseInt(id_raw);
-            Products product = productDAO.GetProductById(productId);
+            Product product = productDAO.GetProductById(productId);
             request.setAttribute("product", product);
             request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
         } catch (NumberFormatException e) {
@@ -69,9 +69,9 @@ public class UpdateProductServlet extends HttpServlet {
             discount = Float.parseFloat(discount_raw);
             productID = Integer.parseInt(id_raw);
 
-            Products oldProduct = productDAO.GetProductById(productID);
+            Product oldProduct = productDAO.GetProductById(productID);
 
-            Products updatedProduct = new Products();
+            Product updatedProduct = new Product();
             updatedProduct.setProductID(productID);
             updatedProduct.setCategories(oldProduct.getCategories());
             updatedProduct.setProductName(productName);

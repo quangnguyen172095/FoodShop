@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Admin;
 import model.Categories;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -22,13 +22,13 @@ import model.Products;
 public class DAOProducts extends DBContext {
 
 
-    public Products findById(int pid) {
-        Products pro = null;
+    public Product findById(int pid) {
+        Product pro = null;
         String sql = "select * from products where ProductID =" + pid;
         ResultSet rs = getData(sql);
         try {
             while (rs.next()) {
-                Products p = new Products();
+                Product p = new Product();
                 p.setProductID(rs.getInt("ProductID"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 p.setProductName(rs.getString("ProductName"));
@@ -64,8 +64,8 @@ public class DAOProducts extends DBContext {
         }
     }
 
-    public ArrayList<Products> searchProductByCategory(int cateId) {
-        ArrayList<Products> searchList = new ArrayList<>();
+    public ArrayList<Product> searchProductByCategory(int cateId) {
+        ArrayList<Product> searchList = new ArrayList<>();
 
         try {
             String sql = "select * from Products\n"
@@ -74,7 +74,7 @@ public class DAOProducts extends DBContext {
             statement.setInt(1, cateId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Products p = new Products();
+                Product p = new Product();
                 p.setProductID(rs.getInt("ProductID"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 p.setProductName(rs.getString("ProductName"));
@@ -98,8 +98,8 @@ public class DAOProducts extends DBContext {
         return searchList;
     }
 
-    public ArrayList<Products> getProducts() {
-        ArrayList<Products> products = new ArrayList<>();
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
 
         try {
             String sql = "select * \n"
@@ -108,7 +108,7 @@ public class DAOProducts extends DBContext {
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Products p = new Products();
+                Product p = new Product();
                 p.setProductID(rs.getInt("ProductID"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 p.setProductName(rs.getString("ProductName"));
@@ -141,8 +141,8 @@ public class DAOProducts extends DBContext {
         return products;
     }
 
-    public ArrayList<Products> gettop6Products() {
-        ArrayList<Products> products = new ArrayList<>();
+    public ArrayList<Product> gettop6Products() {
+        ArrayList<Product> products = new ArrayList<>();
 
         try {
             String sql = "SELECT TOP 6 p.productid, p.productname, p.price, p.discount, p.image, c.categoryname, SUM(od.quantity) AS total_quantity\n"
@@ -154,7 +154,7 @@ public class DAOProducts extends DBContext {
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Products p = new Products();
+                Product p = new Product();
                 p.setProductID(rs.getInt("productid")); // Điều chỉnh tên cột thành chữ thường
                 p.setProductName(rs.getString("productname"));
                 p.setPrice(rs.getFloat("price"));
@@ -200,7 +200,7 @@ public class DAOProducts extends DBContext {
 
     public static void main(String[] args) {
         DAOProducts dao = new DAOProducts();
-        for (Products pro : dao.getProducts()) {
+        for (Product pro : dao.getProducts()) {
             System.out.println(pro);
         }
     }
@@ -229,8 +229,8 @@ public class DAOProducts extends DBContext {
         return 0;
     }
 
-    public List<Products> pagingProduct(int index) {
-        List<Products> list = new ArrayList<>();
+    public List<Product> pagingProduct(int index) {
+        List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Products\n"
                 + "                       ORDER BY ProductID\n"
                 + "                       OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY";
@@ -239,7 +239,7 @@ public class DAOProducts extends DBContext {
             st.setInt(1, (index - 1) * 10);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Products product = new Products();
+                Product product = new Product();
                 product.setProductID(rs.getInt("ProductID"));
                 CategoryDAO categoryDAO = new CategoryDAO();
                 Categories category = categoryDAO.GetCategoryById(rs.getInt("CategoryID"));
@@ -262,7 +262,7 @@ public class DAOProducts extends DBContext {
         return list;
     }
 
-    public Products GetProductById(int productId) {
+    public Product GetProductById(int productId) {
         String sql = "SELECT [ProductID]\n"
                 + "                           ,[CategoryID]\n"
                 + "                           ,[ProductName]\n"
@@ -284,7 +284,7 @@ public class DAOProducts extends DBContext {
             st.setInt(1, productId);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Products product = new Products();
+                Product product = new Product();
                 CategoryDAO categoryDAO = new CategoryDAO();
                 Categories category = categoryDAO.GetCategoryById(rs.getInt("CategoryID"));
                 product.setCategories(category);
@@ -306,7 +306,7 @@ public class DAOProducts extends DBContext {
         return null;
     }
 
-    public void UpdateProduct(Products product) {
+    public void UpdateProduct(Product product) {
         String sql = "UPDATE [dbo].[Products]\n"
                 + "                        SET [CategoryID] = ?\n"
                 + "                           ,[ProductName] = ?\n"
@@ -341,7 +341,7 @@ public class DAOProducts extends DBContext {
         }
     }
 
-    public Products SearchByID(int productsID) {
+    public Product SearchByID(int productsID) {
         AdminDAO adminDAO = new AdminDAO();
         String sql = "SELECT *  FROM [dbo].[Products] WHERE ProductID = ?";
         PreparedStatement stm;
@@ -352,7 +352,7 @@ public class DAOProducts extends DBContext {
             rs = stm.executeQuery();
             if (rs.next()) {
 
-                Products foundProducts = new Products();
+                Product foundProducts = new Product();
 //                Categories foundCategories = CategoriesDAO.SearchByID(rs.getInt("CategoryID"));
 //            foundProducts.setCategories(foundCategories);
                 foundProducts.setProductName(rs.getString("ProductName"));

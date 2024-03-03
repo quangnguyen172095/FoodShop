@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Categories;
-import model.Products;
+import model.Product;
 
 public class ListProductServlet extends HttpServlet {
 
@@ -49,7 +49,7 @@ public class ListProductServlet extends HttpServlet {
         if (count % 10 != 0) {
             endPage++;
         }
-        List<Products> list = product_DAO.pagingProduct(index);
+        List<Product> list = product_DAO.pagingProduct(index);
         List<Categories> listCategory = category_DAO.GetAllCategory();
 
         request.setAttribute("products", list);

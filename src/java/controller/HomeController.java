@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import model.Admin;
 import model.ContentHome;
 import model.HeaderHome;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -63,7 +63,7 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
-        ArrayList<Products> listProductHome = dao.gettop6Products();
+        ArrayList<Product> listProductHome = dao.gettop6Products();
         DAOHome dh = new DAOHome();
         
         //content aboutus
@@ -109,7 +109,7 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOProducts dao = new DAOProducts();
-        ArrayList<Products> listProductHome = dao.gettop6Products();
+        ArrayList<Product> listProductHome = dao.gettop6Products();
         DAOHome dh = new DAOHome();
         
         //content aboutus

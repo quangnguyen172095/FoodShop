@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Customer;
+import model.Customers;
 
 @WebServlet(name = "AddCustomerServlet", urlPatterns = {"/AddCustomerServlet"})
 public class AddCustomerServlet extends HttpServlet {
@@ -46,7 +46,7 @@ public class AddCustomerServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         try {
-            Customer customer = new Customer(0, fullName, phone, email, null, username, password, address);
+            Customers customer = new Customers(0, fullName, phone, email, null, username, password, address);
             customerDAO.InsertCustomer(customer);
             request.setAttribute("message", "Add successfully!");
             request.getRequestDispatcher("addCustomer.jsp").forward(request, response);

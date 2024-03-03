@@ -166,7 +166,7 @@ public class Order {
         this.TransactionStatus = TransactionStatus;
     }
 
-    private Products getProductById(int productId) {
+    private Product getProductById(int productId) {
         DAOProducts dao = new DAOProducts();
         return dao.findById(productId);
     }
@@ -174,7 +174,7 @@ public class Order {
     public float getTotalPrice() {
         float total = 0;
         for (OrderDetail od : orderDetails) {
-            Products product = getProductById(od.getProductID());
+            Product product = getProductById(od.getProductID());
             if (product != null) {
                 total += od.getQuantity() * (product.getPrice() - product.getPrice() * product.getDiscount());
             }
@@ -182,7 +182,7 @@ public class Order {
         return total;
     }
 
-    public void addItems(Products product) {
+    public void addItems(Product product) {
         for (OrderDetail od : orderDetails) {
             if (od.getProductID() == product.getProductID()) {
                 od.setQuantity(od.getQuantity() + 1);

@@ -6,7 +6,7 @@ package controller;
 
 import config.Config;
 import jakarta.servlet.http.HttpSession;
-import model.Customer;
+import model.Customers;
 import model.Order;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import model.HeaderHome;
 import model.OrderDetail;
-import model.Products;
+import model.Product;
 
 public class CheckoutController extends HttpServlet {
 
@@ -81,7 +81,7 @@ public class CheckoutController extends HttpServlet {
         DAOHome dh = new DAOHome();
         ArrayList<HeaderHome> listHeader = dh.getHeader();
         request.setAttribute("listHeader", listHeader);
-        Customer a = (Customer) session.getAttribute("CUS");
+        Customers a = (Customers) session.getAttribute("CUS");
         Order order = (Order) session.getAttribute("order");
         float total = 0;
         if (order != null) {
@@ -131,7 +131,7 @@ public class CheckoutController extends HttpServlet {
         String address = request.getParameter("address");
         String paymentMethod = request.getParameter("paymentMethod");
         HttpSession session = request.getSession();
-        Customer c = (Customer) session.getAttribute("CUS");
+        Customers c = (Customers) session.getAttribute("CUS");
         Order order = (Order) session.getAttribute("order");
         float total = 0;
         if (order != null) {
@@ -230,7 +230,7 @@ public class CheckoutController extends HttpServlet {
         }
     }
 
-    public void handleCheckout(HttpSession session, Customer c, Order order, String address, float freight, String paymentMethod) {
+    public void handleCheckout(HttpSession session, Customers c, Order order, String address, float freight, String paymentMethod) {
         DAOOrder daoOrder = new DAOOrder();
         DAOOrderDetail daoOrderDetail = new DAOOrderDetail();
         DAOProducts daoProduct = new DAOProducts();
@@ -258,7 +258,7 @@ public class CheckoutController extends HttpServlet {
 
         //update quantity of product
         for (OrderDetail orderDetail : order.getOrderDetails()) {
-            Products p = daoProduct.GetProductById(orderDetail.getProductID());
+            Product p = daoProduct.GetProductById(orderDetail.getProductID());
             int reduceAmount = p.getQuantity() - orderDetail.getQuantity();
             daoProduct.updateAmounProduct(reduceAmount, orderDetail.getProductID());
         }

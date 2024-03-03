@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.HeaderHome;
-import model.Products;
+import model.Product;
 
 
 /**
@@ -64,7 +64,7 @@ public class DetailController extends HttpServlet {
         String id_raw = request.getParameter("id");
         int productid = Integer.parseInt(id_raw);
         DAOProducts dao = new DAOProducts();
-        Products product = dao.findById(productid);
+        Product product = dao.findById(productid);
         
         //header
         DAOHome dh = new DAOHome();

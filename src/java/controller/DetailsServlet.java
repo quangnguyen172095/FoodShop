@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dal.DAOOrderDetail;
-import dal.DAOOrder;
+import dal.OrderDetailsDAO;
+import dal.OrdersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.util.List;
-import model.OrderDetail;
-import model.Order;
+import model.OrderDetails;
+import model.Orders;
 
 /**
  *
@@ -62,17 +62,16 @@ public class DetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOOrderDetail od = new DAOOrderDetail();
-        DAOOrder ordersDAO = new DAOOrder();
+        OrderDetailsDAO od = new OrderDetailsDAO();
+        OrdersDAO ordersDAO = new OrdersDAO();
         String orderID_raw = request.getParameter("orderID");
         int orderID = Integer.parseInt(orderID_raw);
-        List<OrderDetail> foudOD = od.SearchByID(orderID);
-        Order orders = ordersDAO.SearchByID(orderID);
+        List<OrderDetails> foudOD = od.SearchByID(orderID);
+        Orders orders = ordersDAO.SearchByID(orderID);
         HttpSession session = request.getSession();
-        session.setAttribute("orderID", orderID);
-        request.setAttribute("foundOrder", orders);
-        request.setAttribute("foundOD", foudOD);
-        request.getRequestDispatcher("orderDetails.jsp").forward(request, response);
+        session.setAttribute("foundOrder", orders);
+        session.setAttribute("foundOD", foudOD);
+        request.getRequestDispatcher("orderDetail.jsp").forward(request, response);
     }
 
     /**
@@ -86,23 +85,7 @@ public class DetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        HttpSession session = request.getSession();
-        int orderID = (int) session.getAttribute("orderID");
-        DAOOrder ordersDAO = new DAOOrder();
-
-//        if ("confirm".equals(action)) {
-//            if (ordersDAO.updateOrder(orderID, "TransactionStatus", "Success")) {
-//                session.setAttribute("message", "Order has been confirmed");
-//            }
-//            String directURL = "details?orderID=" + orderID;
-//            response.sendRedirect(directURL);
-//        } else if ("delete".equals(action)) {
-//            if (ordersDAO.deleteOrder(orderID)) {
-//                request.setAttribute("message", "Order " + orderID + "has been deleted");
-//                request.getRequestDispatcher("ordermanagement").forward(request, response);
-//            }
-//        }
+        processRequest(request, response);
     }
 
     /**

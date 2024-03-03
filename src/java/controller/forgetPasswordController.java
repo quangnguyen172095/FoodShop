@@ -14,7 +14,7 @@ import dal.DAOCustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Admin;
-import model.Customer;
+import model.Customers;
 
 /**
  *
@@ -81,7 +81,7 @@ public class forgetPasswordController extends HttpServlet {
         String repass = request.getParameter("confirmPassword");
         AccountDAO adb = new AccountDAO();
         DAOCustomer cdb = new DAOCustomer();
-        Customer customer = cdb.checkCustomerExist(user);
+        Customers customer = cdb.checkCustomerExist(user);
         Admin account = adb.checkAccountExist(user);
         if (account == null && customer == null) {
             request.setAttribute("mess", "Account does not exist!");

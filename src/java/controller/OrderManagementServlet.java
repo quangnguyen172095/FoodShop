@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dal.CartDAO;
-import dal.DAOOrder;
+import dal.AdminDAO;
+import dal.OrdersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,8 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Cart;
-import model.Order;
+import model.Admin;
+import model.Orders;
 
 /**
  *
@@ -61,34 +61,28 @@ public class OrderManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOOrder ordersDAO = new DAOOrder();
-        CartDAO cartDAO = new  CartDAO();
+        OrdersDAO ordersDAO = new OrdersDAO();
+        AdminDAO adminDAO = new AdminDAO();
         HttpSession session = request.getSession();
-        session.removeAttribute("message");
-        String indexPage = request.getParameter("index");
-        String orderBy = request.getParameter("orderBy");
-        if (indexPage == null) {
-            indexPage = "1";
+        Admin admin = adminDAO.SearchByID(2);
+        session.setAttribute("account", admin);
+        String action = request.getParameter("action");
+        if (action != null) {
+            String orderID_raw = request.getParameter("orderID");
+            int orderID = Integer.parseInt(orderID_raw);
+            ordersDAO.deleteOrder(orderID);
         }
-        if (orderBy == null) {
-            orderBy = "OrderID";
-        }
-        if (orderBy.equals("CreatedBy")) {
-            orderBy = "OrderID";
-        }
-        int index = Integer.parseInt(indexPage);
-        List<Order> listOrders = ordersDAO.getAllOrders(orderBy, index);
         int count = ordersDAO.getNRecords();
-        int endPage = count / 10;
-        if (count % 10 != 0) {
+        int endPage = count / 5;
+        if (count % 5 != 0) {
             endPage++;
         }
-        List<Cart> carts = cartDAO.getAllCarts();
-        if (!carts.isEmpty()) {
-            request.setAttribute("message", "Your customer has just confirmed the order");
-        }
-        request.setAttribute("tag", index);
-        request.setAttribute("endPage", endPage);
+        List<Orders> listAllOrders = ordersDAO.getAllOrders();
+        List<Orders> listOrders = ordersDAO.getAllOrders(1, 5);
+        session.setAttribute("length", 5);
+        session.setAttribute("tag", 1);
+        session.setAttribute("endPage", endPage);
+        request.setAttribute("listAllOrders", listAllOrders);
         request.setAttribute("listOrders", listOrders);
         request.getRequestDispatcher("orderManagement.jsp").forward(request, response);
     }
@@ -104,7 +98,29 @@ public class OrderManagementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        OrdersDAO ordersDAO = new OrdersDAO();
+
+        HttpSession session = request.getSession();
+        int length = (int) session.getAttribute("length");
+        int index = (int) session.getAttribute("tag");
+        String length_raw = request.getParameter("length");
+        String index_raw = request.getParameter("index");
+        if (length_raw == null) { // Chon page
+            index = Integer.parseInt(index_raw);
+        } else if (index_raw == null) { //Chon danh muc
+            length = Integer.parseInt(length_raw);
+        }
+        int count = ordersDAO.getNRecords();
+        int endPage = count / length;
+        if (count % length != 0) {
+            endPage++;
+        }
+        List<Orders> listOrders = ordersDAO.getAllOrders(index, length);
+        session.setAttribute("length", length);
+        session.setAttribute("tag", index);
+        session.setAttribute("endPage", endPage);
+        request.setAttribute("listOrders", listOrders);
+        request.getRequestDispatcher("orderManagement.jsp").forward(request, response);
     }
 
     /**

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Order;
 import model.OrderDetail;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -51,7 +51,7 @@ public class DAOOrderDetail extends DBContext {
                 OrderDetail od = new OrderDetail();
                 Order foundOrder = ordersDAO.SearchByID(rs.getInt("OrderID"));
                 od.setOrders(foundOrder);
-                Products foundProduct = productsDAO.SearchByID(rs.getInt("ProductID"));
+                Product foundProduct = productsDAO.SearchByID(rs.getInt("ProductID"));
                 od.setProducts(foundProduct);
                 od.setQuantity(rs.getInt("Quantity"));
                 listOrderDetails.add(od);
