@@ -1,8 +1,16 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
+/**
+ *
+ * @author acer
+ */
 public class Customers {
 
-    private int customerId;
+    private int customerID;
     private String fullName;
     private String phone;
     private String email;
@@ -11,12 +19,11 @@ public class Customers {
     private String password;
     private String address;
 
-
     public Customers() {
     }
 
     public Customers(int customerId, String fullName, String phone, String email, String image, String username, String password, String address) {
-        this.customerId = customerId;
+        this.customerID = customerId;
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
@@ -26,12 +33,12 @@ public class Customers {
         this.address = address;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getFullName() {
@@ -90,5 +97,9 @@ public class Customers {
         this.address = address;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Customers{" + "customerID=" + customerID + ", fullName=" + fullName + ", phone=" + phone + ", email=" + email + ", image=" + image + ", username=" + username + ", password=" + password + ", address=" + address + '}';
+    }
+
 }

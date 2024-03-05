@@ -24,7 +24,7 @@ public class CustomersDAO extends DBContext {
         List<Customers> listCustomers = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Customers]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Customers customer = new Customers();
@@ -47,7 +47,7 @@ public class CustomersDAO extends DBContext {
     public Customers SearchByID(int customersID) {
         String sql = "SELECT *  FROM [dbo].[Customers] WHERE CustomerID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, customersID);
             rs = stm.executeQuery();
             if (rs.next()) {
@@ -71,7 +71,7 @@ public class CustomersDAO extends DBContext {
     public Customers SearchByName(String fullName) {
         String sql = "SELECT *  FROM [dbo].[Customers] WHERE FullName = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setString(1, fullName);
             rs = stm.executeQuery();
             if (rs.next()) {
@@ -97,7 +97,7 @@ public class CustomersDAO extends DBContext {
                 + "([FullName],[Phone],[Email],[Image],[Username],[Password],[Address])\n"
                 + "VALUES (? ,?,?,?,?,?,?)";
         try {
-            stm = con.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
+            stm = connection.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
             stm.setString(1, customer.getFullName());
             stm.setString(2, customer.getPhone());
             stm.setString(3, customer.getEmail());

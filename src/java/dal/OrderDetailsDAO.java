@@ -28,7 +28,7 @@ public class OrderDetailsDAO extends DBContext {
         List<OrderDetails> listOrderDetails = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[OrderDetails]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 OrderDetails od = new OrderDetails();
@@ -49,7 +49,7 @@ public class OrderDetailsDAO extends DBContext {
         List<OrderDetails> listOrderDetails = new ArrayList<>();
         String sql = "SELECT *  FROM [dbo].[OrderDetails] WHERE OrderID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, ordersID);
             rs = stm.executeQuery();
             while (rs.next()) {
@@ -72,7 +72,7 @@ public class OrderDetailsDAO extends DBContext {
                 + "           ([OrderID],[ProductID],[Quantity])\n"
                 + "     VALUES (?,?,?)";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, orderDetails.getOrders().getOrderID());
             stm.setInt(2, orderDetails.getProducts().getProductID());
             stm.setInt(3, orderDetails.getQuantity());
@@ -89,7 +89,7 @@ public class OrderDetailsDAO extends DBContext {
             if (orderID == 0) {
                 sql = "DELETE * FROM OrderDetails";
             }
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, orderID);
             stm.executeUpdate();
             return true;

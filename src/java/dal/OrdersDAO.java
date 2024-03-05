@@ -29,7 +29,7 @@ public class OrdersDAO extends DBContext {
         List<Orders> listCustomers = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Orders]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Orders order = new Orders();
@@ -56,7 +56,7 @@ public class OrdersDAO extends DBContext {
         List<Orders> listCustomers = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Orders] ORDER BY  OrderID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, (index - 1) * length);
             stm.setInt(2, length);
             rs = stm.executeQuery();
@@ -84,7 +84,7 @@ public class OrdersDAO extends DBContext {
     public Orders SearchByID(int ordersID) {
         String sql = "SELECT *  FROM [dbo].[Orders] WHERE OrderID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, ordersID);
             rs = stm.executeQuery();
             if (rs.next()) {
@@ -111,7 +111,7 @@ public class OrdersDAO extends DBContext {
     public int getNRecords() {
         String sql = "SELECT COUNT(*)  FROM [dbo].[Orders]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -129,7 +129,7 @@ public class OrdersDAO extends DBContext {
                 + "JOIN Admin a on a.AdminID = o.CreatedBy\n"
                 + "WHERE CONCAT(o.OrderID, c.FullName, o.OrderDate, a.FullName, o.PaymentMethod, o.OrderStatus) LIKE ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + textSearchString + "%");
             rs = stm.executeQuery();
             while (rs.next()) {
@@ -158,7 +158,7 @@ public class OrdersDAO extends DBContext {
         String sql = "SELECT * FROM [dbo].[Orders] \n"
                 + "WHERE OrderStatus like ? AND PaymentMethod like ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + orderStatus + "%");
             stm.setString(2, "%" + payment + "%");
             rs = stm.executeQuery();
@@ -189,14 +189,14 @@ public class OrdersDAO extends DBContext {
                 + "[Freight],[CreatedBy],[CreatedOn],[TransactionStatus])\n"
                 + " VALUES (?,?,?,?,?,?,?,?,?)";
         try {
-            stm = con.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
+            stm = connection.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
             stm.setInt(1, orders.getCustomers().getCustomerID());
             stm.setString(2, orders.getOrderStatus());
             stm.setTimestamp(3, orders.getOrderDate());
             stm.setString(4, orders.getPaymentMethod());
             stm.setString(5, orders.getShippingAddress());
             stm.setDouble(6, orders.getFreight());
-            stm.setInt(7, orders.getCreatedBy().getAdminId());
+            stm.setInt(7, orders.getCreatedBy().getAdminID());
             stm.setTimestamp(8, orders.getCreatedOn());
             stm.setString(9, orders.getTransactionStatus());
             stm.executeUpdate();
@@ -219,7 +219,7 @@ public class OrdersDAO extends DBContext {
                 + "         ,[TransactionStatus] = ?\n"
                 + " WHERE OrderID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setString(1, orderStatus);
             stm.setString(2, paymentMethod);
             stm.setString(3, shippingAddress);
@@ -238,7 +238,7 @@ public class OrdersDAO extends DBContext {
         String sql = "DELETE FROM [dbo].[Orders] WHERE OrderID = ?";
         try {
             if (detailsDAO.deleteOrderDetail(orderID)) {
-                stm = con.prepareStatement(sql);
+                stm = connection.prepareStatement(sql);
                 stm.setInt(1, orderID);
                 stm.executeUpdate();
                 return true;

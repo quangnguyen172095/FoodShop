@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.AdminDAO;
+import dal.AdminsDAO;
 import dal.OrdersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,7 +62,7 @@ public class OrderManagementServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         OrdersDAO ordersDAO = new OrdersDAO();
-        AdminDAO adminDAO = new AdminDAO();
+        AdminsDAO adminDAO = new AdminsDAO();
         HttpSession session = request.getSession();
         Admin admin = adminDAO.SearchByID(2);
         session.setAttribute("account", admin);

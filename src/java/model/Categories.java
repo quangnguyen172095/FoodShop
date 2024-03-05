@@ -4,88 +4,84 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
- * @author PC
+ * @author acer
  */
 public class Categories {
-    private int CategoryID;
-    private String CategoryName;
-    private int CreatedBy;
-    private Date CreatedOn;
-    private int ModifiedBy;
-    private Date ModifiedOn;
 
-    public Categories(int CategoryID, String CategoryName, int CreatedBy, Date CreatedOn, int ModifiedBy, Date ModifiedOn) {
-        this.CategoryID = CategoryID;
-        this.CategoryName = CategoryName;
-        this.CreatedBy = CreatedBy;
-        this.CreatedOn = CreatedOn;
-        this.ModifiedBy = ModifiedBy;
-        this.ModifiedOn = ModifiedOn;
-    }
-
-    public int getCreatedBy() {
-        return CreatedBy;
-    }
-
-    public void setCreatedBy(int CreatedBy) {
-        this.CreatedBy = CreatedBy;
-    }
-
-    public Date getCreatedOn() {
-        return CreatedOn;
-    }
-
-    public void setCreatedOn(Date CreatedOn) {
-        this.CreatedOn = CreatedOn;
-    }
-
-    public int getModifiedBy() {
-        return ModifiedBy;
-    }
-
-    public void setModifiedBy(int ModifiedBy) {
-        this.ModifiedBy = ModifiedBy;
-    }
-
-    public Date getModifiedOn() {
-        return ModifiedOn;
-    }
-
-    public void setModifiedOn(Date ModifiedOn) {
-        this.ModifiedOn = ModifiedOn;
-    }
-    
-    
+    private int categoryID;
+    private String categoryName;
+    private Admin createdBy;
+    private Timestamp createdOn;
+    private Admin modifiedBy;
+    private Timestamp modifiedOn;
 
     public Categories() {
     }
 
-    public Categories(int CategoryID, String CategoryName) {
-        this.CategoryID = CategoryID;
-        this.CategoryName = CategoryName;
+    public Categories(int categoryID, String categoryName, Admin createdBy, Timestamp createdOn, Admin modifiedBy, Timestamp modifiedOn) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.modifiedBy = modifiedBy;
+        this.modifiedOn = modifiedOn;
     }
 
     public int getCategoryID() {
-        return CategoryID;
+        return categoryID;
     }
 
-    public void setCategoryID(int CategoryID) {
-        this.CategoryID = CategoryID;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
     public String getCategoryName() {
-        return CategoryName;
+        return categoryName;
     }
 
-    public void setCategoryName(String CategoryName) {
-        this.CategoryName = CategoryName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    
-    
-    
+    public Admin getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Admin createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Admin getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(Admin modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public Timestamp getModifiedOn() {
+        return modifiedOn;
+    }
+
+    public void setModifiedOn(Timestamp modifiedOn) {
+        this.modifiedOn = modifiedOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Categories{" + "categoryID=" + categoryID + ", categoryName=" + categoryName + ", createdBy=" + createdBy + ", createdOn=" + createdOn + ", modifiedBy=" + modifiedBy + ", modifiedOn=" + modifiedOn + '}';
+    }
+
 }

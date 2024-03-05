@@ -25,7 +25,7 @@ public class ProductsDAO extends DBContext {
         List<Products> listProducts = new ArrayList<>();
         String sql = "SELECT *  FROM [dbo].[Products]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Products p = new Products();
@@ -61,7 +61,7 @@ public class ProductsDAO extends DBContext {
         AdminsDAO adminDAO = new AdminsDAO();
         String sql = "SELECT *  FROM [dbo].[Products] WHERE ProductID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, productsID);
             rs = stm.executeQuery();
             if (rs.next()) {
@@ -97,7 +97,7 @@ public class ProductsDAO extends DBContext {
         AdminsDAO adminDAO = new AdminsDAO();
         String sql = "SELECT *  FROM [dbo].[Products] WHERE ProductName = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setString(1, productName);
             rs = stm.executeQuery();
             if (rs.next()) {

@@ -24,11 +24,11 @@ public class AdminsDAO extends DBContext {
         List<Admin> listUsers = new ArrayList<>();
         String sql = "SELECT *  FROM [dbo].[Admin]";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Admin admin = new Admin();
-                admin.setAdminId(rs.getInt("AdminID"));
+                admin.setAdminID(rs.getInt("AdminID"));
                 admin.setFullName(rs.getString("FullName"));
                 admin.setUsername(rs.getString("Username"));
                 admin.setPassword(rs.getString("Password"));
@@ -50,12 +50,12 @@ public class AdminsDAO extends DBContext {
     public Admin SearchByID(int adminID) {
         String sql = "SELECT *  FROM [dbo].[Admin] WHERE AdminID = ?";
         try {
-            stm = con.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, adminID);
             rs = stm.executeQuery();
             if (rs.next()) {
                 Admin foundAdmin = new Admin();
-                foundAdmin.setAdminId(rs.getInt("AdminID"));
+                foundAdmin.setAdminID(rs.getInt("AdminID"));
                 foundAdmin.setFullName(rs.getString("FullName"));
                 foundAdmin.setUsername(rs.getString("Username"));
                 foundAdmin.setPassword(rs.getString("Password"));

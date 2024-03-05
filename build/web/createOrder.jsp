@@ -12,24 +12,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>List Orders</title>
+        <title>JSP Page</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
         <link rel="stylesheet" type="text/css" href="cssheet/main.css">
-        <!-- Font-icon css-->
-        <link href="asset/fonts/themify-icons-font/themify-icons/themify-icons.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <link rel="stylesheet" type="text/css"
-              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
-        <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
         <style>
             label {
                 font-weight: bold;
@@ -157,9 +153,9 @@
                                     <label><h4>Staff Information</h4></label>
                                     <input hidden name="adminID" value=
                                            <c:if test="${orders != null}">
-                                               "${orders.getCreatedBy().getAdminId()}"
+                                               "${orders.getCreatedBy().getAdminID()}"
                                            </c:if><c:if test="${orders == null}">
-                                              "${sessionScope.account.getAdminId()}"
+                                              "${sessionScope.account.getAdminID()}"
                                            </c:if>
                                            >
                                     <div class="form-group row">

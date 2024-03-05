@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.AdminDAO;
+import dal.AdminsDAO;
 import dal.CustomersDAO;
 import dal.OrderDetailsDAO;
 import dal.OrdersDAO;
@@ -106,7 +106,7 @@ public class CreateOrderServlet extends HttpServlet {
         OrdersDAO ordersDAO = new OrdersDAO();
         ProductsDAO productsDAO = new ProductsDAO();
         OrderDetailsDAO detailsDAO = new OrderDetailsDAO();
-        AdminDAO adao = new AdminDAO();
+        AdminsDAO adao = new AdminsDAO();
         HttpSession session = request.getSession();
 
         List<OrderDetails> detailsList = new ArrayList<>();
