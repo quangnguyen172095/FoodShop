@@ -20,26 +20,52 @@ public class AccountDAO extends DBContext{
     PreparedStatement ps = null;
     ResultSet rs = null;
     
+    public boolean checkMailExist(String email) {
+        String sql = "select * from Admin where Email = ? ";
+        try {
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setString(1, email);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean checkPhoneExist(String phone_num) {
+        String sql = "select * from Admin where Phone = ? ";
+        try {
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setString(1, phone_num);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
      public Admin checkAccountExist(String user) {
-                String query = "select * from Admin\n"+"where Username = ?\n";
+                String query = "select * from Admin where Username = ?";
 
                 try{
                     ps= con.prepareStatement(query);
                     ps.setString(1, user);
                     rs= ps.executeQuery();
                     while(rs.next()){
-                        Admin a = new Admin();
-                        a.setAdminId(rs.getInt(1));
-                        a.setFullName(rs.getString(2));
-                        a.setUsername(rs.getString(3));
-                        a.setPassword(rs.getString(4));
-                        a.setEmail(rs.getString(5));
-                        a.setPhone(rs.getString(6));                        
-                        a.setRole(rs.getString(7));
-                        a.setJoinedDate(rs.getDate(8));
-                        a.setAddress(rs.getString(9));
-                        a.setDepartment(rs.getString(10));
-                        return a;
+                        return new Admin(rs.getInt("AdminID"),rs.getString("Fullname")
+                                ,rs.getString("Username"),rs.getString("Password")
+                                ,rs.getString("Email"),rs.getString("Phone")
+                                ,rs.getString("Role"),rs.getString("Image")
+                                ,rs.getDate("JoinedDate"),rs.getString("Address"), 
+                                rs.getString("Department"));
                     }
                 }catch(Exception E){     
                 }

@@ -138,7 +138,7 @@ public class AddCart extends HttpServlet {
                         + "        </div>\n"
                         + "    </td>\n"
                         + "    <td class=\"text-right font-weight-semibold align-middle p-4\">" + formattedUnitPrice + " VNĐ</td>\n"
-                        + "    <td class=\"align-middle p-4\"><input type=\"number\" name=\"quantity\" class=\"form-control text-center\" value=\"" + item.getQuantity() + "\" min=\"0\" onchange=\"updateQuantity(this, " + item.getProductID() + ")\"></td>\n"
+                        + "    <td class=\"align-middle p-4\"><input type=\"number\" name=\"quantity\" class=\"form-control text-center\" value=\"" + item.getQuantity() + "\" min=\"0\"  onchange=\"updateQuantity(this, " + item.getProductID() + ")\" onkeydown=\"return event.keyCode !== 69 && event.keyCode !== 189\"></td>\n"
                         + "    <td class=\"text-right font-weight-semibold align-middle p-4\">" + formattedTotalPricePerItem + " VNĐ</td>\n"
                         + "    <td class=\"text-center align-middle px-0\"><a href=\"cart?productID=" + item.getProductID() + "&action=delete\" class=\"shop-tooltip close float-none text-danger\" title=\"\" data-original-title=\"Remove\">×</a></td>\n"
                         + "</tr>";

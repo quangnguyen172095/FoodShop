@@ -88,6 +88,12 @@ body {
 }
 
 /*css category*/
+.list-group-category-item a span {
+    font-size: 13px; /* Kích thước chữ */
+    display: block; /* Chuyển chữ thành dạng block để trở thành một dòng */
+    padding: 5px 0;
+    margin-right:150px
+}
 #category-section {
     text-align: center;
     background-color: #f8f9fa; /* Màu nền */
