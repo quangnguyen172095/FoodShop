@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import model.Admin;
 import model.Customers;
 import model.JavaMailSender;
 
@@ -92,7 +93,12 @@ public class SignupController extends HttpServlet {
             Customers c = daocus.checkCustomerExist(username);
             boolean checkEmail = daocus.checkMailExist(email);
             boolean checkPhone = daocus.checkPhoneExist(phone);
-            if (c == null && checkEmail == false && checkPhone == false) {
+            
+            Admin a = dao.checkAccountExist(username);
+            boolean checkEmailAdmin = dao.checkMailExist(email);
+            boolean checkPhoneAdmin = dao.checkPhoneExist(phone);
+            if (c == null && checkEmail == false && checkPhone == false 
+                    && a==null && checkEmailAdmin == false && checkPhoneAdmin == false) {
                 JavaMailSender sm = new JavaMailSender();
                 String code = sm.getRandom();
                 boolean test = sm.sendEmailSignup(email, username, code);
@@ -106,7 +112,10 @@ public class SignupController extends HttpServlet {
             }else{
                 if (c != null) {
                     request.setAttribute("err", "Tên đăng nhập đã tồn tại");
-                } else {
+                }else if(a!=null){
+                    request.setAttribute("err", "Tên đăng nhập đã tồn tại");
+                }
+                else {
                     request.setAttribute("err", "Email hoặc Số điện thoại đã được sử dụng");
                 }
                 request.getRequestDispatcher("Signup.jsp").forward(request, response);

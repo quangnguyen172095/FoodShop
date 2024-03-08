@@ -101,7 +101,7 @@
                                             ${formattedPrice} VNĐ
                                         </td>
                                         <td class="align-middle p-4">
-                                            <input type="number" name="quantity" class="form-control text-center" value="${i.getQuantity()}" min="0" onchange="updateQuantity(this, ${i.getProductID()})">
+                                            <input type="number" name="quantity" class="form-control text-center" value="${i.getQuantity()}" min="0" onchange="updateQuantity(this, ${i.getProductID()})" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189">
                                         </td>
                                         <td class="text-right font-weight-semibold align-middle p-4">
                                             <fmt:formatNumber type="number" value="${Math.round((i.getQuantity() * (i.getPrice() - (i.getPrice() * i.getDiscount())) * 100)) / 100}" pattern="###,###,###.##" var="formattedTotalPrice"/>

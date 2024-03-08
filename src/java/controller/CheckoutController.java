@@ -250,15 +250,15 @@ public class CheckoutController extends HttpServlet {
         String transaction = "";
         String payment = "";
         if (paymentMethod.equals("1")) {
-            transaction = "Pending";
-            payment = "Cash on Delivery";
+            transaction = "Chưa thanh toán";
+            payment = "Thanh toán khi giao hàng";
         } else {
-            transaction = "Success";
+            transaction = "Đã thanh toán";
             payment = "VNPay";
         }
 
         //insert order
-        daoOrder.saveOrder(new Order(c.getCustomerId(), "Processing", dateInsert, payment, address, freight, transaction));
+        daoOrder.saveOrder(new Order(c.getCustomerId(), "Đang xử lý", dateInsert, payment, address, freight, transaction));
 
         //insert order detail
         int orderID = daoOrder.getOrderID();
