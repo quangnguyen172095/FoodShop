@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/PC/Desktop/swpfoodshop/src/java/dal/DAOCustomer.java</file>
             <file>file:/C:/Users/PC/Desktop/swpfoodshop/src/java/controller/SignupController.java</file>
+            <file>file:/C:/Users/PC/Desktop/swpfoodshop/src/java/controller/CheckoutController.java</file>
+            <file>file:/C:/Users/PC/Desktop/swpfoodshop/src/java/model/Admin.java</file>
+            <file>file:/C:/Users/PC/Desktop/swpfoodshop/src/java/dal/AccountDAO.java</file>
         </group>
     </open-files>
 </project-private>

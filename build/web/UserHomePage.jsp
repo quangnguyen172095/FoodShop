@@ -49,7 +49,7 @@
                                         <c:if test="${sessionScope.ACC != null || sessionScope.CUS != null}">
                                             <c:choose>
                                                 <c:when test="${sessionScope.CUS != null}">
-                                                    <a href="DetailAccountController">
+                                                    <a href="editprofile">
                                                         <i class="fa"></i>Xin chào ${sessionScope.CUS.getFullName()}
                                                     </a>
                                                 </c:when>
