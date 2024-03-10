@@ -19,6 +19,44 @@ public class CustomersDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
+    
+    public Customers checkCustomerExist(String user) {
+        String query = "select * from Customers where Username = ?";
+
+        try {
+            stm = con.prepareStatement(query);
+            stm.setString(1, user);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Customers(rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("Email"),
+                        rs.getString("Image"),
+                        rs.getString("Username"),
+                        rs.getString("Password"),
+                        rs.getString("Address"));
+            }
+        } catch (Exception E) {
+        }
+        return null;
+    }
+
+    public void updateCustomer(Customers c) {
+        try {
+            String sql = "update Customers\n"
+                    + "set FullName = ?, Username = ?, Password = ? , Address = ?\n"
+                    + "where CustomerID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, c.getFullName());
+            statement.setString(2, c.getUsername());
+            statement.setString(3, c.getPassword());
+            statement.setString(4, c.getAddress());
+            statement.setInt(5, c.getCustomerId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public List<Customers> getAllCustomers() {
         List<Customers> listCustomers = new ArrayList<>();
