@@ -12,7 +12,6 @@
         <title>Xác minh đăng ký</title>
         <style>
             body {
-                color: #fff;
                 background: #63738a;
                 font-family: 'Roboto', sans-serif;
             }
@@ -105,7 +104,7 @@
                     <input type="submit" class="btn btn-success btn-lg btn-block" value="Xác minh">
                 </div>
             </form>
-            ${requestScope.mess}    
+            <h5 style="color: red; margin-bottom: 30px">${requestScope.mess}</h5>   
         </div>
     </body>
 </html>

@@ -103,7 +103,7 @@
                                         </ul>
                                         <div class="tab-content pt-3">
                                             <div class="tab-pane active">
-                                                <form action="editpassword" method="post" class="form" novalidate="">
+                                                <form action="editpassword" method="post" class="form" ">
 
                                                     <div class="row">
                                                         <div class="col-12 col-sm-6 mb-3">

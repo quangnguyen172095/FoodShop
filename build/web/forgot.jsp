@@ -14,39 +14,25 @@
                             <div class="card-body p-md-5">
                                 <div class="row justify-content-center">
                                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Change Password</p>
+                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Quên mật khẩu</p>
                                         <form class="mx-1 mx-md-4" action="forgetPasswordController" method="post">
                                             
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label class="form-label" for="form3Example1c">Enter UserName</label>
+                                                    <label class="form-label" for="form3Example1c">Nhập tên đăng nhập hoặc email</label>
                                                     <input type="text" id="form3Example1c" class="form-control" required name="user"/>
                                                 </div>
                                             </div>
                                             
-                                            <div class="d-flex flex-row align-items-center mb-4">
-                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                                <div class="form-outline flex-fill mb-0">
-                                                    <label class="form-label" for="form3Example1c">New Password</label>
-                                                    <input type="password" id="form3Example1c" class="form-control" required name="newPassword"/>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex flex-row align-items-center mb-4">
-                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                <div class="form-outline flex-fill mb-0">
-                                                    <label class="form-label" for="form3Example3c">Confirm Password</label>
-                                                    <input type="password" id="form3Example3c" class="form-control" required name="confirmPassword"/>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="d-block mx-4 mb-3 mb-lg-4  text-danger"><b>${mess}</b></div>
                                             <div class="d-block mx-4 mb-3 mb-lg-4 text-center">
-                                                <button class="btn btn-primary btn-block px-5 w-100" type="submit">Confirm</button>
+                                                <button class="btn btn-primary btn-block px-5 w-100" type="submit">Gửi</button>
                                             </div>
                                             
                                             <div class="text-center pt-2">
-                                                <a href="login.jsp">Back to Login</a>
+                                                <a href="login.jsp">Quay lại đăng nhập</a>
                                             </div>
                                         </form>
                                     </div>
