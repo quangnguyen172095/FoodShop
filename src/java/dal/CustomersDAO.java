@@ -20,6 +20,28 @@ public class CustomersDAO extends DBContext {
     PreparedStatement stm;
     ResultSet rs;
     
+    public Customers checkCustomerExistByEmail(String email) {
+        String query = "select * from Customers where Email = ?";
+
+        try {
+            stm = con.prepareStatement(query);
+            stm.setString(1, email);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Customers(rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("Email"),
+                        rs.getString("Image"),
+                        rs.getString("Username"),
+                        rs.getString("Password"),
+                        rs.getString("Address"));
+            }
+        } catch (Exception E) {
+        }
+        return null;
+    }
+    
     public Customers checkCustomerExist(String user) {
         String query = "select * from Customers where Username = ?";
 

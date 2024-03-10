@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Xác minh đăng ký</title>
+        <title>Xác minh quên mật khẩu</title>
         <style>
             body {
                 background: #63738a;
@@ -89,14 +89,17 @@
             .signup-form form a:hover {
                 text-decoration: underline;
             }
+            .signup-form h5 {
+                color: red !important;
+            }
         </style>
     </head>
     <body>
         <div class="signup-form">
-            <h2>Xác minh đăng ký</h2>
+            <h2>Quên mật khẩu</h2>
             <span style="color: black;">Chúng tôi đã gửi một mã bảo mật đến Email của bạn.</span>
             <span style="color: black;">Kiểm tra Email để lấy mã</span>
-            <form action="signupverify" method="post">
+            <form action="verifyforgotpass" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" name="scode" placeholder="Nhập mã xác minh" required>
                 </div>
@@ -104,7 +107,7 @@
                     <input type="submit" class="btn btn-success btn-lg btn-block" value="Xác minh">
                 </div>
             </form>
-            <h5 style="color: red; margin-bottom: 30px">${requestScope.mess}</h5>   
+            <h5 style="color: red; margin-bottom: 30px">${requestScope.mess}</h5>
         </div>
     </body>
 </html>

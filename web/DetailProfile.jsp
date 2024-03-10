@@ -84,13 +84,13 @@
                                 <div class="card-body">
                                     <div class="e-profile">
                                         <div class="row">
-                                            
+
                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">${customer.getFullName()}</h4>
                                                     <h5 style="color: red; margin-bottom: 30px">${requestScope.mess}</h5>
                                                     <div class="mt-2">
-                                                       
+
                                                     </div>
                                                 </div>
                                                 <div class="text-center text-sm-right">
@@ -102,7 +102,7 @@
                                         </ul>
                                         <div class="tab-content pt-3">
                                             <div class="tab-pane active">
-                                                <form action="editprofile" method="post" class="form" novalidate="">
+                                                <form action="editprofile" method="post" class="form">
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="row">
@@ -115,7 +115,7 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Tên đăng nhập</label>
-                                                                        <input class="form-control" type="text" name="username" placeholder="${customer.getUsername()}" value="${customer.getUsername()}" required>
+                                                                        <input class="form-control" type="text" name="username" placeholder="${customer.getUsername()}" value="${customer.getUsername()}" required="required">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -139,41 +139,13 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Địa chỉ</label>
-                                                                        <input class="form-control" type="text" name="address" placeholder="${customer.getAddress()}" value="${customer.getAddress()}" required>
+                                                                        <input class="form-control" type="text" name="address" placeholder="${customer.getAddress()}" value="${customer.getAddress()}" required="required">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-<!--                                                    <div class="row">
-                                                        <div class="col-12 col-sm-6 mb-3">
-                                                            <div class="mb-2"><b>Đổi mật khẩu</b></div>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label>Mật khẩu hiện tại</label>
-                                                                        <input class="form-control" type="passwordold" >
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label>Mật khẩu mới</label>
-                                                                        <input class="form-control" type="passwordnew1" >
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label>Xác nhận mật khẩu mới <span class="d-none d-xl-inline">Password</span></label>
-                                                                        <input class="form-control" type="passwordnew2" ></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
-                                                    </div>-->
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-end">
                                                             <button class="btn btn-primary" type="submit">Lưu</button>
@@ -188,7 +160,7 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
 
                 </div>

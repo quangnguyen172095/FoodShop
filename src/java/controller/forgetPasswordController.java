@@ -10,11 +10,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.AccountDAO;
+import dal.CustomersDAO;
 import dal.DAOCustomer;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Admin;
 import model.Customers;
+import model.JavaMailSender;
 
 /**
  *
@@ -76,32 +79,65 @@ public class forgetPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String mess = "";
         String user = request.getParameter("user");
-        String pass = request.getParameter("newPassword");
-        String repass = request.getParameter("confirmPassword");
-        AccountDAO adb = new AccountDAO();
-        DAOCustomer cdb = new DAOCustomer();
-        Customers customer = cdb.checkCustomerExist(user);
-        Admin account = adb.checkAccountExist(user);
-        if (account == null && customer == null) {
-            request.setAttribute("mess", "Account does not exist!");
-            request.getRequestDispatcher("forgot.jsp").forward(request, response);
-        }
-        if (!pass.equals(repass)) {
-            request.setAttribute("mess", "password does not match!");
-            request.getRequestDispatcher("forgot.jsp").forward(request, response);
-            return;
-        } else {
-            if (account != null) {
-                // Nếu tài khoản tồn tại, cập nhật mật khẩu của tài khoản
-                adb.UpDatePassWord(pass, user);
-            } else if (customer != null) {
-                // Nếu khách hàng tồn tại, cập nhật mật khẩu của khách hàng
-                cdb.UpDatePassWordCustomer(pass, user);
+        CustomersDAO dao = new CustomersDAO();
+        Customers cus = dao.checkCustomerExist(user);
+        if (cus == null) {
+            cus = dao.checkCustomerExistByEmail(user);
+            if (cus == null) {
+                mess = "Không tìm thấy tên tài khoản và email.";
+                request.setAttribute("mess", mess);
+                request.getRequestDispatcher("forgot.jsp").forward(request, response);
+            } else {
+                String cusUsername = cus.getUsername();
+                JavaMailSender sm = new JavaMailSender();
+                String code = sm.getRandom();
+                boolean test = sm.sendEmailSignup(user, cusUsername, code);
+                if (test) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("code", code);
+                    session.setAttribute("cus", cus);
+                }
+                response.sendRedirect("verifyforgotpass");
             }
-            request.setAttribute("mess", "Change Password successfully!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            String cusEmail = cus.getEmail();
+            JavaMailSender sm = new JavaMailSender();
+            String code = sm.getRandom();
+            boolean test = sm.sendEmailSignup(cusEmail, user, code);
+            if (test) {
+                HttpSession session = request.getSession();
+                session.setAttribute("code", code);
+                session.setAttribute("cus", cus);
+            }
+            response.sendRedirect("verifyforgotpass");
         }
+//        String pass = request.getParameter("newPassword");
+//        String repass = request.getParameter("confirmPassword");
+//        AccountDAO adb = new AccountDAO();
+//        DAOCustomer cdb = new DAOCustomer();
+//        Customers customer = cdb.checkCustomerExist(user);
+//        Admin account = adb.checkAccountExist(user);
+//        if (account == null && customer == null) {
+//            request.setAttribute("mess", "Account does not exist!");
+//            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+//        }
+//        if (!pass.equals(repass)) {
+//            request.setAttribute("mess", "password does not match!");
+//            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+//            return;
+//        } else {
+//            if (account != null) {
+//                // Nếu tài khoản tồn tại, cập nhật mật khẩu của tài khoản
+//                adb.UpDatePassWord(pass, user);
+//            } else if (customer != null) {
+//                // Nếu khách hàng tồn tại, cập nhật mật khẩu của khách hàng
+//                cdb.UpDatePassWordCustomer(pass, user);
+//            }
+//            request.setAttribute("mess", "Change Password successfully!");
+//            request.getRequestDispatcher("login.jsp").forward(request, response);
+//        }
 
     }
 
