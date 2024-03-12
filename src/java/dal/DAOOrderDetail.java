@@ -49,8 +49,7 @@ public class DAOOrderDetail extends DBContext {
             rs = stm.executeQuery();
             while (rs.next()) {
                 OrderDetail od = new OrderDetail();
-                Order foundOrder = ordersDAO.SearchByID(rs.getInt("OrderID"));
-                od.setOrders(foundOrder);
+                od.setOrderID(rs.getInt("OrderID"));
                 Product foundProduct = productsDAO.SearchByID(rs.getInt("ProductID"));
                 od.setProducts(foundProduct);
                 od.setQuantity(rs.getInt("Quantity"));

@@ -5,25 +5,27 @@
 package controller;
 
 import dal.DAOHome;
-import dal.DAOProducts;
+import dal.DAOOrder;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import model.Categories;
-import model.ContentHome;
+import model.Customers;
 import model.HeaderHome;
-import model.Product;
+import model.Order;
 
 
 /**
  *
  * @author PC
  */
-public class CategoryController extends HttpServlet {
+@WebServlet(name = "HistoryOrderController", urlPatterns = {"/historyorder"})
+public class HistoryOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +44,10 @@ public class CategoryController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoryController</title>");            
+            out.println("<title>Servlet HistoryOrderController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CategoryController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet HistoryOrderController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,22 +65,22 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOHome dh = new DAOHome();
-        //footer
-        //footer
-        ContentHome ch4 = dh.getContentById(7);
-        request.setAttribute("ch4", ch4);
-        
-        ArrayList<HeaderHome> listHeader = dh.getHeader();
-        request.setAttribute("listHeader", listHeader);
-        String categoryId = request.getParameter("cid");
-        int cid = Integer.parseInt(categoryId);
-        DAOProducts dao = new DAOProducts();
-        ArrayList<Product> listProductByCategory = dao.searchProductByCategory(cid);
-        ArrayList<Categories> listCategories = dao.getCategories();
-        request.setAttribute("listbypage", listProductByCategory);
-        request.setAttribute("listCategories", listCategories);
-        request.getRequestDispatcher("Menu.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        model.Customers customer = (Customers) session.getAttribute("CUS");
+        if (customer == null) {
+            // Chuyển hướng người dùng đến trang đăng nhập
+            response.sendRedirect("login.jsp"); // Đây là đường dẫn đến trang đăng nhập của bạn
+        } else {
+            DAOHome dh = new DAOHome();
+            ArrayList<HeaderHome> listHeader = dh.getHeader();
+            request.setAttribute("listHeader", listHeader);
+            request.setAttribute("customer", customer);
+            
+            DAOOrder dao = new DAOOrder();
+            ArrayList<Order> orders = dao.getOrderByCustomerId(customer.getCustomerId());
+            request.setAttribute("orders", orders);
+            request.getRequestDispatcher("HistoryOrder.jsp").forward(request, response);
+        }
     }
 
     /**
