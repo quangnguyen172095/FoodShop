@@ -100,6 +100,9 @@ public class OrdersDAO extends DBContext {
                 Customers foundCustomers = customersDAO.SearchByID(rs.getInt("CustomerID"));
                 foundOrder.setCustomers(foundCustomers);
                 Admin foundAdmin = adminDAO.SearchByID(rs.getInt("CreatedBy"));
+                if(foundAdmin == null){
+                foundOrder.setCreatedBy(0);
+                }else{
                 foundOrder.setCreatedBy(foundAdmin.getAdminId());
                 foundOrder.setOrderStatus(rs.getString("OrderStatus"));
                 foundOrder.setOrderDate(rs.getDate("OrderDate"));
@@ -107,7 +110,7 @@ public class OrdersDAO extends DBContext {
                 foundOrder.setPaymentMethod(rs.getString("PaymentMethod"));
                 foundOrder.setShippingAddress(rs.getString("ShippingAddress"));
                 foundOrder.setTransactionStatus(rs.getString("TransactionStatus"));
-                return foundOrder;
+                return foundOrder;}
             }
         } catch (SQLException e) {
             System.out.println("Error");

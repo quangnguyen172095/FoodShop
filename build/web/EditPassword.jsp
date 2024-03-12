@@ -71,7 +71,7 @@
                             <ul class="nav">
                                 <li class="nav-item"><a class="nav-link px-2 active" href="editprofile"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Thông tin</span></a></li>
                                 <li class="nav-item"><a class="nav-link px-2" href="editpassword" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>Mật khẩu</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="historyorder" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Đơn hàng</span></a></li>
                             </ul>
                         </div>
                     </div>
