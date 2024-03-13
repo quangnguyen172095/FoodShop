@@ -52,7 +52,7 @@ public class DAOOrder extends DBContext {
 
     public ArrayList<Order> getOrderByCustomerId(int customerid) {
         ArrayList<Order> orders = new ArrayList<>();
-        String sql = "select * from Orders where CustomerID = ?";
+        String sql = "SELECT * FROM Orders WHERE CustomerID = ? ORDER BY OrderID DESC";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, customerid);

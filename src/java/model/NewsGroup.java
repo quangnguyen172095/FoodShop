@@ -14,6 +14,12 @@ public class NewsGroup {
     public NewsGroup() {
     }
 
+    public NewsGroup(String newsGroupName) {
+        this.newsGroupName = newsGroupName;
+    }
+    
+    
+
     public NewsGroup(int newsGroupId, String newsGroupName, int createdBy, Date createdOn, int modifiedBy, Date modifiedOn) {
         this.newsGroupId = newsGroupId;
         this.newsGroupName = newsGroupName;

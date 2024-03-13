@@ -9,13 +9,32 @@ public class News {
     private String title;
     private String content;
     private String image;
+    private String author;
     private int createdBy;
     private Date createdOn;
     private int modifiedBy;
     private Date modifiedOn;
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public News() {
     }
+
+    public News(int newsId, NewsGroup newsGroup, String title, String content, String image, String author) {
+        this.newsId = newsId;
+        this.newsGroup = newsGroup;
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.author = author;
+    }
+    
 
     public News(int newsId, NewsGroup newsGroup, String title, String content, String image, int createdBy, Date createdOn, int modifiedBy, Date modifiedOn) {
         this.newsId = newsId;
