@@ -82,35 +82,25 @@
                 </section>   
             </div>
 
-
-            <section class="bg-04" id="our-menu">
-                <div class="container">
-                    <div class="row justify-content-center"> <!-- Thêm lớp justify-content-center -->
-                        <div class="col-12">
-                            <div class="row">
-                                <c:forEach items="${news}" var="l">
-                                    <div class="col-md-4 col-sm-6">
-                                        <div class="wrapper">
-                                            <div class="tab-content">
-                                                <figure>
-                                                    <img src="<c:url value='/assets/images/blog/${l.getImage()}'/>">
-                                                </figure>
-                                                <div class="sentence">
-                                                    <h3>
-                                                        <a href="<c:url value='/newdetail?id=${l.getNewsId()}'/> ">${l.getTitle()}</a>
-                                                    </h3>
-                                                        <h6>${l.getNewsGroup().getNewsGroupName()}</h6><br><!-- comment -->
-                                                    Tác giả: <h6>${l.getAuthor()}</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>
+            <div class="news-container">
+                <h2 class="news-title">${news.getTitle()}</h2>
+                <p class="news-date">${news.getModifiedOn()}</p>
+                <p class="news-date">${news.getNewsGroup().getNewsGroupName()}</p>
+                <p class="news-intro">${news.getContent()}</p>
+                <p class="news-body">${news.getBody1()}</p>
+                <div class="image-container">
+                    <img src="<c:url value='/assets/images/blog/${news.getImage()}'/>" alt="Image 1" class="news-image">
                 </div>
-            </section>
+                <p class="news-body">${news.getBody2()}</p>
+                <div class="image-container">
+                    <img src="<c:url value='/assets/images/blog/${news.getImg2()}'/>" alt="Image 2" class="news-image">
+                </div>
+                <p class="news-body">${news.getBody3()}</p>
+                <p class="news-author">${news.getAuthor()}</p>
+            </div>
+
+
+
 
         </main>
         <!--phantrang-->
@@ -165,7 +155,63 @@
     <script src="assets/js/plugins/owl.carousel.min.js"></script>
     <script src="assets/js/script.js"></script>
     <style>
+        .news-container {
+            display: flex;
+            flex-direction: column;
+        }
 
+        .news-author {
+            font-weight: bold; /* In đậm */
+            align-self: flex-end; /* Lệch sang bên phải của container cha */
+            margin-top: auto; /* Đảm bảo rằng tên tác giả được căn chỉnh xuống dưới cùng */
+            margin-right: 20px; /* Khoảng cách giữa tên tác giả và bài viết */
+        }
+
+        .news-body {
+            /* Thêm margin-bottom cho phần body để tạo khoảng cách với tên tác giả */
+            margin-bottom: 20px;
+        }
+        .news-date{
+            font-size: 13px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Căn giữa hình ảnh */
+            margin-top: 5px; /* Khoảng cách giữa hình ảnh và các đoạn văn bản */
+        }
+
+        .news-image {
+            max-width: 100%; /* Đảm bảo hình ảnh không bị tràn ra ngoài */
+            height: auto; /* Đảm bảo tỷ lệ khung hình ảnh được bảo toàn */
+            align-self: center; /* Căn giữa theo chiều dọc */
+            width: 600px;
+        }
+        /* Định nghĩa CSS cho phần tin tức */
+        .news-container {
+            margin-top: 20px;
+            margin-left: 100px;
+            margin-right: 50px;
+        }
+        .news-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .news-intro {
+            font-size: 16px;
+            color: #666;
+            font-weight: bold; /* In đậm cho phần giới thiệu */
+        }
+        .news-body {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .news-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
         .news-group {
             margin-top: 170px;
             border: 1px solid #ccc; /* Tạo border với màu xám nhạt */
