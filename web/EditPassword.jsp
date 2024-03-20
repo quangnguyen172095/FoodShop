@@ -69,9 +69,11 @@
                     <div class="card p-3">
                         <div class="e-navlist e-navlist--active-bg">
                             <ul class="nav">
+                                <ul class="nav">
                                 <li class="nav-item"><a class="nav-link px-2 active" href="editprofile"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Thông tin</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="editpassword" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>Mật khẩu</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="historyorder" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Đơn hàng</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="editpassword"><i class="fa fa-fw fa-cog mr-1"></i><span>Mật khẩu</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="historyorder"><i class="fa fa-fw fa-th mr-1"></i><span>Đơn hàng</span></a></li>
+                            </ul>
                             </ul>
                         </div>
                     </div>

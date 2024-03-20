@@ -97,7 +97,7 @@
                                                 </figure>
                                                 <div class="sentence">
                                                     <h3>
-                                                        <a href="#">${l.getTitle()}</a>
+                                                        <a href="<c:url value='/newdetail?id=${l.getNewsId()}'/> ">${l.getTitle()}</a>
                                                     </h3>
                                                         <h6>${l.getNewsGroup().getNewsGroupName()}</h6><br><!-- comment -->
                                                     Tác giả: <h6>${l.getAuthor()}</h6>

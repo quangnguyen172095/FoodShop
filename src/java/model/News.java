@@ -14,6 +14,61 @@ public class News {
     private Date createdOn;
     private int modifiedBy;
     private Date modifiedOn;
+    private String body1;
+    private String body2;
+    private String img2;
+    private String body3;
+
+    public News(int newsId, NewsGroup newsGroup, String title, String content, String image, String author, int createdBy, Date createdOn, int modifiedBy, Date modifiedOn, String body1, String body2, String img2, String body3) {
+        this.newsId = newsId;
+        this.newsGroup = newsGroup;
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.author = author;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.modifiedBy = modifiedBy;
+        this.modifiedOn = modifiedOn;
+        this.body1 = body1;
+        this.body2 = body2;
+        this.img2 = img2;
+        this.body3 = body3;
+    }
+
+    public String getBody1() {
+        return body1;
+    }
+
+    public void setBody1(String body1) {
+        this.body1 = body1;
+    }
+
+    public String getBody2() {
+        return body2;
+    }
+
+    public void setBody2(String body2) {
+        this.body2 = body2;
+    }
+
+    public String getImg2() {
+        return img2;
+    }
+
+    public void setImg2(String img2) {
+        this.img2 = img2;
+    }
+
+    public String getBody3() {
+        return body3;
+    }
+
+    public void setBody3(String body3) {
+        this.body3 = body3;
+    }
+    
+    
 
     public String getAuthor() {
         return author;

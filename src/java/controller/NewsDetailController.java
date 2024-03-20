@@ -4,28 +4,27 @@
  */
 package controller;
 
+import dal.DAOHome;
+import dal.NewsDAO;
+import dal.NewsGroupDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.AccountDAO;
-import dal.CustomersDAO;
-import dal.DAOCustomer;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import model.Admin;
-import model.Customers;
-import model.JavaMailSender;
+import java.util.ArrayList;
+import model.ContentHome;
+import model.HeaderHome;
+
 
 /**
  *
- * @author Admin
+ * @author PC
  */
-//forgetPassword
-@WebServlet(name = "forgetPasswordController", urlPatterns = {"/forgetPasswordController"})
-public class forgetPasswordController extends HttpServlet {
+@WebServlet(name = "NewsDetailController", urlPatterns = {"/newdetail"})
+public class NewsDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +43,10 @@ public class forgetPasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet forgetPasswordController</title>");
+            out.println("<title>Servlet NewsDetailController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet forgetPasswordController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet NewsDetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +64,26 @@ public class forgetPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        DAOHome dh = new DAOHome();
+        ArrayList<HeaderHome> listHeader = dh.getHeader();
+        request.setAttribute("listHeader", listHeader);
+        
+        //footer
+        ContentHome ch4 = dh.getContentById(7);
+        request.setAttribute("ch4", ch4);
+        
+        //newsgroup
+        NewsGroupDAO daoGroup = new NewsGroupDAO();
+        ArrayList<model.NewsGroup> newsGroups = daoGroup.getNewsGroup();
+        request.setAttribute("newsgroup", newsGroups);
+        
+        //news detail
+        String id_raw = request.getParameter("id");
+        int id = Integer.parseInt(id_raw);
+        NewsDAO dao = new NewsDAO();
+        model.News news = dao.getNewsById(id);
+        request.setAttribute("news", news);
+        request.getRequestDispatcher("NewsDetail.jsp").forward(request, response);
     }
 
     /**
@@ -79,41 +97,7 @@ public class forgetPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String mess = "";
-        String user = request.getParameter("user");
-        CustomersDAO dao = new CustomersDAO();
-        Customers cus = dao.checkCustomerExist(user);
-        if (cus == null) {
-            cus = dao.checkCustomerExistByEmail(user);
-            if (cus == null) {
-                mess = "Không tìm thấy tên tài khoản và email.";
-                request.setAttribute("mess", mess);
-                request.getRequestDispatcher("forgot.jsp").forward(request, response);
-            } else {
-                String cusUsername = cus.getUsername();
-                JavaMailSender sm = new JavaMailSender();
-                String code = sm.getRandom();
-                boolean test = sm.sendEmailSignup(user, cusUsername, code);
-                if (test) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("code", code);
-                    session.setAttribute("cus", cus);
-                }
-                response.sendRedirect("verifyforgotpass");
-            }
-        } else {
-            String cusEmail = cus.getEmail();
-            JavaMailSender sm = new JavaMailSender();
-            String code = sm.getRandom();
-            boolean test = sm.sendEmailSignup(cusEmail, user, code);
-            if (test) {
-                HttpSession session = request.getSession();
-                session.setAttribute("code", code);
-                session.setAttribute("cus", cus);
-            }
-            response.sendRedirect("verifyforgotpass");
-        }
-
+        processRequest(request, response);
     }
 
     /**
