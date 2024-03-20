@@ -92,7 +92,11 @@
                     <img src="<c:url value='/assets/images/blog/${news.getImage()}'/>" alt="Image 1" class="news-image">
                 </div>
                 <p class="news-body">${news.getBody2()}</p>
+                <div class="image-container">
+                    <img src="<c:url value='/assets/images/blog/${news.getImg2()}'/>" alt="Image 2" class="news-image">
+                </div>
                 <p class="news-body">${news.getBody3()}</p>
+                <p class="news-author">${news.getAuthor()}</p>
             </div>
 
 
@@ -151,6 +155,22 @@
     <script src="assets/js/plugins/owl.carousel.min.js"></script>
     <script src="assets/js/script.js"></script>
     <style>
+        .news-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-author {
+            font-weight: bold; /* In đậm */
+            align-self: flex-end; /* Lệch sang bên phải của container cha */
+            margin-top: auto; /* Đảm bảo rằng tên tác giả được căn chỉnh xuống dưới cùng */
+            margin-right: 20px; /* Khoảng cách giữa tên tác giả và bài viết */
+        }
+
+        .news-body {
+            /* Thêm margin-bottom cho phần body để tạo khoảng cách với tên tác giả */
+            margin-bottom: 20px;
+        }
         .news-date{
             font-size: 13px;
         }
@@ -170,6 +190,7 @@
         .news-container {
             margin-top: 20px;
             margin-left: 100px;
+            margin-right: 50px;
         }
         .news-title {
             font-size: 20px;
